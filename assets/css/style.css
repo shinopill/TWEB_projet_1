@@ -87,6 +87,13 @@ border-radius: 0px!important;
 .btn-style-three:hover {
     color: #fff;
 }
+
+#whatButton {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
 /* =============================================================
   HOME SECTION STYLES
  ============================================================ */
