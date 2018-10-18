@@ -20,9 +20,11 @@ function updateProfile(user, i) {
     console.log(user.avatar_url);
     const avatar = document.getElementById(avatarIdString);
     const name   = document.getElementById(nameIdString);
-
+    const test = document.getElementById('user1');
     avatar.src = user.avatar_url;
     name.innerHTML = user.login;
+    console.log(test);
+    console.log(test.value);
 }
 
 /*function handleSearch(username) {
