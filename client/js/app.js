@@ -1,10 +1,12 @@
+//const fetch = require('node-fetch');
+
 const baseUrl = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
     : 'server url';
 
 function getUser(username) {
     return fetch(`${baseUrl}/users/${username}`)
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
                 throw new Error('User not found / error');
             }
@@ -15,21 +17,21 @@ function getUser(username) {
 function updateProfile(user, i) {
     const avatarIdString = 'user' + i + '-avatar';
     const nameIdString   = 'user' + i + '-name';
-    
+    console.log(user.name);
     const avatar = document.getElementById(avatarIdString);
     const name   = document.getElementById(nameIdString);
 
-    avatar.src = user.avatar;
+    avatar.src = user.avatar_url;
     name.innerHTML = user.name;
 }
 
-function handleSearch(username) {
+/*function handleSearch(username) {
     return Promise.all([
         getUser(username),
     ]).then(([user]) => {
         updateProfile(user);
     })
-}
+}*/
 
 getUser('mathieujee')
     .then(user => {
