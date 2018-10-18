@@ -17,12 +17,12 @@ function getUser(username) {
 function updateProfile(user, i) {
     const avatarIdString = 'user' + i + '-avatar';
     const nameIdString   = 'user' + i + '-name';
-    console.log(user.name);
+    console.log(user.avatar_url);
     const avatar = document.getElementById(avatarIdString);
     const name   = document.getElementById(nameIdString);
 
     avatar.src = user.avatar_url;
-    name.innerHTML = user.name;
+    name.innerHTML = user.login;
 }
 
 /*function handleSearch(username) {
