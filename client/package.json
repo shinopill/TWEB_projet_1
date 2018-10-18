@@ -5,7 +5,7 @@
     "scripts": {
         "start": "live-server --host=localhost"
     },
-    "author": "paulnta",
+    "author": "mathieujee",
     "license": "ISC",
     "devDependencies": {
         "live-server": "^1.2.0"
