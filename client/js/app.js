@@ -66,12 +66,15 @@ function findNumberOfCommits(user,userRepo){
             infoRepo.numberOfcommits = numberOfcommits;
             //for each commits, we check the author and then we compare with the user
             for( let j = 0 ; j < numberOfcommits; j += 1){
-                if(!commits[j].author.login.localeCompare(user)){
+                if(commits[j].author != null && !commits[j].author.login.localeCompare(user)){
                     ownCommit += 1;
                 }
             }
             infoRepo.ownCommit = ownCommit;
             
+        })
+        .catch(err => {
+            console.log(err);
         })
 
         data.push(infoRepo)
