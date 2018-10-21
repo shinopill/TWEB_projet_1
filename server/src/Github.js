@@ -49,7 +49,7 @@ class Github {
     }
     
     commit(username,repo) {
-        return this.request(`/repos/${username}/${repo}/commits`);
+        return this.request(`/repos/${username}/${repo}/stats/contributors`)
     }
    
     /*repoLanguages(owner, repoName) {

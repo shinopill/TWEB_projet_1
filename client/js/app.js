@@ -76,7 +76,7 @@ function updateProfile(user, i) {
 }
 
 
-/*function findNumberOfCommits(user,userRepo){
+function findNumberOfCommits(user,userRepo){
 
     let data = [];
 
@@ -88,17 +88,20 @@ function updateProfile(user, i) {
         
         //For each repos we search for the commits
         getCommits(user,userRepo[i].name).then(commits =>{
+            let totalCommit = 0;
             let ownCommit = 0;
-            let numberOfcommits = commits.length
-            infoRepo.numberOfcommits = numberOfcommits;
+            let numberOfcommiter = commits.length
+            infoRepo.numberOfcommiter = numberOfcommiter;
             //for each commits, we check the author and then we compare with the user
-            for( let j = 0 ; j < numberOfcommits; j += 1){
+            for( let j = 0 ; j < numberOfcommiter; j += 1){
+                totalCommit += commits[j].total
                 if(commits[j].author != null && !commits[j].author.login.localeCompare(user)){
-                    ownCommit += 1;
+                    ownCommit = commits[j];
                 }
             }
+            infoRepo.totalCommit = totalCommit;
             infoRepo.ownCommit = ownCommit;
-            
+           console.log(commits)
         })
         .catch(err => {
             console.log(err);
@@ -107,7 +110,7 @@ function updateProfile(user, i) {
         data.push(infoRepo)
     }
    return data;
-}*/
+}
 
 /*function handleSearch(username) {
     return Promise.all([
@@ -135,6 +138,6 @@ getUser(user2)
 getRepos(user1)
     .then(repo => {
         //We get all the commits done by the user
-        //let data  = findNumberOfCommits(user1,repo);
-        //console.log(data);
+        let data  = findNumberOfCommits(user1,repo);
+        console.log(data);
     })
