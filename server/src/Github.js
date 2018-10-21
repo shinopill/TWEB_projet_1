@@ -47,7 +47,11 @@ class Github {
     repos(username) {
         return this.request(`/users/${username}/repos`);
     }
-
+    
+    commit(username,repo) {
+        return this.request(`/repos/${username}/${repo}/commits`);
+    }
+   
     /*repoLanguages(owner, repoName) {
         return this.request(`/repos/${owner}/${repoName}/languages`);
     }*/

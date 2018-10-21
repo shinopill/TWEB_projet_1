@@ -29,7 +29,7 @@ app.get('/users/:username', (req, res, next) => {
 });
 
 app.get('/users/:username/repos', (req, res, next) => {
-  client.user(req.params.username)
+  client.repos(req.params.username)
     .then(user => res.send(user))
     .catch(next);
 });
@@ -38,6 +38,12 @@ app.get('/languages/:username', (req, res, next) => {
   client.userLanguages(req.params.username)
     .then(utils.getReposLanguagesStats)
     .then(stats => res.send(stats))
+    .catch(next);
+});
+
+app.get('/users/:username/:repo/commits', (req, res, next) => {
+  client.commit(req.params.username,req.params.repo)
+    .then(commits => res.send(commits))
     .catch(next);
 });
 

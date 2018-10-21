@@ -22,6 +22,18 @@ function getRepos(username) {
             }
             return response.json();
         });
+
+}
+
+
+function getCommits(username,repoName){
+    return fetch(`${baseUrl}/users/${username}/${repoName}/commits`)
+    .then((response) => {
+        if (!response.ok) {
+            window.location='http://localhost:8080';
+        }
+        return response.json();
+    });
 }
 
 function updateProfile(user, i) {
@@ -34,6 +46,37 @@ function updateProfile(user, i) {
     const test = document.getElementById('user1');
     avatar.src = user.avatar_url;
     name.innerHTML = user.login;
+}
+
+
+function findNumberOfCommits(user,userRepo){
+
+    let data = [];
+
+    let i = 0 
+    //We get through all the repos found
+    for(; i < userRepo.length; i += 1){
+        let infoRepo = {};
+        infoRepo.repoName = userRepo[i].name;
+        
+        //For each repos we search for the commits
+        getCommits(user,userRepo[i].name).then(commits =>{
+            let ownCommit = 0;
+            let numberOfcommits = commits.length
+            infoRepo.numberOfcommits = numberOfcommits;
+            //for each commits, we check the author and then we compare with the user
+            for( let j = 0 ; j < numberOfcommits; j += 1){
+                if(!commits[j].author.login.localeCompare(user)){
+                    ownCommit += 1;
+                }
+            }
+            infoRepo.ownCommit = ownCommit;
+            
+        })
+
+        data.push(infoRepo)
+    }
+   return data;
 }
 
 /*function handleSearch(username) {
@@ -59,5 +102,9 @@ getUser(user2)
     })
     
 
-
-
+getRepos(user1)
+    .then(repo => {
+        //We get all the commits done by the user
+        let data  = findNumberOfCommits(user1,repo);
+        console.log(data);
+    })
