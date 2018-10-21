@@ -50,6 +50,17 @@ function countRepos(user) {
     return c;
 }
 
+function giveTitle(user) {
+    const numberOfRepos = countRepos(user);
+    let title = '';
+
+    if(numberOfRepos < 50) {
+        title = Constants.TITLE_1;
+    }
+
+    return title;
+}
+
 function updateProfile(user, i) {
     const avatarIdString    = 'user' + i + '-avatar';
     const nameIdString      = 'user' + i + '-name';
@@ -61,7 +72,7 @@ function updateProfile(user, i) {
 
     avatar.src = user.avatar_url;
     name.innerHTML = user.login;
-    title.innerHTML = countRepos(user);
+    title.innerHTML = giveTitle(user);
 }
 
 
