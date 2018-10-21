@@ -128,26 +128,26 @@ color:#fff;
      
      max-height:200px;
    border:5px solid rgb(255, 15, 101);
-  content:url('../img/sad.jpg');  /*SAD IMAGE URL  - LEFT SIDE IMAGE*/
-  cursor:pointer;
+  /*content:url('../img/sad.jpg');  /*SAD IMAGE URL  - LEFT SIDE IMAGE
+  cursor:pointer;*/
 }
- #home-sec .main-img:hover {
-  content:url('../img/smile.jpg'); /*SIMLE IMAGE URL ON HOVER - LEFT SIDE IMAGE*/
+ /*#home-sec .main-img:hover {
+  content:url('../img/smile.jpg'); SIMLE IMAGE URL ON HOVER - LEFT SIDE IMAGE
   cursor:pointer;
-}
+}*/
     #home-sec a,#home a:hover {
         text-decoration:none;
     }
 #home-sec .main-img-2 {
      max-height:200px;
    border:5px solid rgb(255, 15, 101);
-  content:url('../img/smile.jpg');  /*SMILE IMAGE URL  - RIGHT SIDE IMAGE*/
-  cursor:pointer;
+  /*content:url('../img/smile.jpg');  /*SMILE IMAGE URL  - RIGHT SIDE IMAGE
+  cursor:pointer;*/
 }
-#home-sec .main-img-2:hover {
-  content:url('../img/sad.jpg');  /*SAD IMAGE URL ON HOVER - RIGHT SIDE IMAGE*/
+/*#home-sec .main-img-2:hover {
+  content:url('../img/sad.jpg');  /*SAD IMAGE URL ON HOVER - RIGHT SIDE IMAGE
   cursor:pointer;
-}
+}*/
  
 
 #home-sec h1 {

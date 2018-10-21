@@ -52,12 +52,19 @@ function countRepos(user) {
 
 function giveTitle(user) {
     const numberOfRepos = countRepos(user);
-    let title = '';
 
-    if(numberOfRepos < 50) {
-        title = Constants.TITLE_1;
+    if(numberOfRepos < 5) {
+        title = 'NOOB';
     }
-
+    else if(numberOfRepos < 10) {
+        title = 'NOOB++';
+    }
+    else if(numberOfRepos < 15) {
+        title = 'INITIATE';
+    }
+    else {
+        title = 'BIGBOSS';
+    }
     return title;
 }
 
