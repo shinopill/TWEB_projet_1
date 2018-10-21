@@ -36,20 +36,36 @@ function getCommits(username,repoName){
     });
 }
 
+function countRepos(user) {
+    let c = 0;
+
+    if (user.public_repos !== undefined) {
+        c += user.public_repos;
+    }
+
+    if(user.private_repos !== undefined) {
+        c += user.private_repos;
+    }
+
+    return c;
+}
+
 function updateProfile(user, i) {
-    const avatarIdString = 'user' + i + '-avatar';
-    const nameIdString   = 'user' + i + '-name';
-    console.log("public_repos = " + user.public_repos);
-    console.log("private_repos = " + user.private_repos);
+    const avatarIdString    = 'user' + i + '-avatar';
+    const nameIdString      = 'user' + i + '-name';
+    const userTitleIdString = 'user' + i + '-title';
+
     const avatar = document.getElementById(avatarIdString);
     const name   = document.getElementById(nameIdString);
-    const test = document.getElementById('user1');
+    const title  = document.getElementById(userTitleIdString);
+
     avatar.src = user.avatar_url;
     name.innerHTML = user.login;
+    title.innerHTML = countRepos(user);
 }
 
 
-function findNumberOfCommits(user,userRepo){
+/*function findNumberOfCommits(user,userRepo){
 
     let data = [];
 
@@ -77,7 +93,7 @@ function findNumberOfCommits(user,userRepo){
         data.push(infoRepo)
     }
    return data;
-}
+}*/
 
 /*function handleSearch(username) {
     return Promise.all([
@@ -105,6 +121,6 @@ getUser(user2)
 getRepos(user1)
     .then(repo => {
         //We get all the commits done by the user
-        let data  = findNumberOfCommits(user1,repo);
-        console.log(data);
+        //let data  = findNumberOfCommits(user1,repo);
+        //console.log(data);
     })
