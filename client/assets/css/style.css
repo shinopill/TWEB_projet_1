@@ -52,6 +52,10 @@ background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%
 background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 
+#compatibilityScore {
+    font-size: 500%;
+}
+
 /*.container {
     text-align: center;
 }*/
@@ -190,6 +194,10 @@ cursor: pointer;
       background-color:rgb(255, 15, 101);
 }
 
+.col-md-2 {
+    white-space: nowrap;
+}
+
     /* =============================================================
   ABOUT SECTION STYLES
  ============================================================ */
@@ -249,6 +257,17 @@ min-height: 450px;
   margin-left: 0.1em;
   font-size: 1em;
 }
+
+.fas { /* heart */
+    color: rgb(255, 15, 101);
+    font-size: 200%;
+}
+
+.far { /* empty heart */
+    color: rgb(251, 147, 185);
+    font-size: 200%;
+}
+
     /* =============================================================
   DOWNLOAD SECTION STYLES
  ============================================================ */
