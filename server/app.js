@@ -28,6 +28,12 @@ app.get('/users/:username', (req, res, next) => {
     .catch(next);
 });
 
+app.get('/users/:username/repos', (req, res, next) => {
+  client.user(req.params.username)
+    .then(user => res.send(user))
+    .catch(next);
+});
+
 app.get('/languages/:username', (req, res, next) => {
   client.userLanguages(req.params.username)
     .then(utils.getReposLanguagesStats)

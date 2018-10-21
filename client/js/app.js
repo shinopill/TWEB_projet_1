@@ -14,10 +14,21 @@ function getUser(username) {
         });
 }
 
+function getRepos(username) {
+    return fetch(`${baseUrl}/users/${username}/repos`)
+        .then((response) => {
+            if (!response.ok) {
+                window.location='http://localhost:8080';
+            }
+            return response.json();
+        });
+}
+
 function updateProfile(user, i) {
     const avatarIdString = 'user' + i + '-avatar';
     const nameIdString   = 'user' + i + '-name';
-   
+    console.log("public_repos = " + user.public_repos);
+    console.log("private_repos = " + user.private_repos);
     const avatar = document.getElementById(avatarIdString);
     const name   = document.getElementById(nameIdString);
     const test = document.getElementById('user1');
