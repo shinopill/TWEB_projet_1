@@ -52,6 +52,10 @@ background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%
 background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
 
+/*.container {
+    text-align: center;
+}*/
+
 /* =============================================================
   BUTTON SECTION STYLES
  ============================================================ */
@@ -92,6 +96,11 @@ border-radius: 0px!important;
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+#calculateButton {
+    margin-top: 90%;
+    padding: 20px;
 }
 
 /* =============================================================

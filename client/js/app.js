@@ -8,7 +8,7 @@ function getUser(username) {
     return fetch(`${baseUrl}/users/${username}`)
         .then((response) => {
             if (!response.ok) {
-                throw new Error('User not found / error');
+                window.location='http://localhost:8080';
             }
             return response.json();
         });
@@ -17,14 +17,12 @@ function getUser(username) {
 function updateProfile(user, i) {
     const avatarIdString = 'user' + i + '-avatar';
     const nameIdString   = 'user' + i + '-name';
-    console.log(user.avatar_url);
+   
     const avatar = document.getElementById(avatarIdString);
     const name   = document.getElementById(nameIdString);
     const test = document.getElementById('user1');
     avatar.src = user.avatar_url;
     name.innerHTML = user.login;
-    console.log(test);
-    console.log(test.value);
 }
 
 /*function handleSearch(username) {
@@ -35,12 +33,20 @@ function updateProfile(user, i) {
     })
 }*/
 
-getUser('mathieujee')
+var url = new URL(document.URL);
+var user1 = url.searchParams.get("user1");
+var user2 = url.searchParams.get("user2");
+
+getUser(user1)
     .then(user => {
         updateProfile(user, 1);
     })
-
-getUser('olivierkopp')
+    
+getUser(user2)
     .then(user => {
         updateProfile(user, 2);
     })
+    
+
+
+
