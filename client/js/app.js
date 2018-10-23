@@ -163,13 +163,22 @@ function updateChart(labels, data) {
       data: {
           labels,
           datasets: [{
-              data
+              data,
+              backgroundColor: [
+                'rgba(255, 0, 0, 150)',
+                'rgba(0, 255, 0, 150)',
+                'rgba(0, 0, 255, 150)',
+                'rgba(255, 0, 255, 150)',
+              ],
           }],
       },
       options: {
           legend: {
-              display: true
-          },
+              display: true,
+              labels: {
+                fontColor: 'white'
+              },
+          },      
       }
   }
 
@@ -255,7 +264,7 @@ async function main() {
   await handleSearch(user1, 1);
   await handleSearch(user2, 2);
   updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
-  updateChart(['un', 'deux', 'trois'], [10, 20, 30]);
+  updateChart(['un', 'deux', 'trois', 'quatre'], [10, 20, 30, 70]);
   //const language3 = document.getElementById('languageScore');
   //language3.setAttribute('data-percent', 99);
   //language3.innerHTML = "<span class=\"percent\">99</span><canvas height=\"206\" width=\"206\" style=\"height: 150px; width: 150px;\"></canvas>";
