@@ -70,11 +70,12 @@ function countRepos(user) {
   return c;
 }
 
+
 function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 = {}) {
   let array1 = [];
   let array2 = [];
   let result = 0;
-  
+
   let i = 0;
   Object.keys(languagesStats1).forEach(key => {
     array1[i] = [key, languagesStats1[key]];
@@ -86,14 +87,6 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
     array2[i] = [key, languagesStats2[key]];
     i++;
   });
-  console.log("ARRAY1 BEFORE:");
-  for(c=0; c<array1.length; c++) {
-    console.log(array1[c]);
-  }
-  console.log("ARRAY2 BEFORE:");
-  for(c=0; c<array2.length; c++) {
-    console.log(array2[c]);
-  }
 
   array1.sort(function (a, b) {
     return b[1] - a[1];
@@ -106,11 +99,11 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
   let scores = [75, 15, 6, 3, 1];
   for (i = 0; i < array1.length && i < array1.length && i < scores.length; i++) {
     console.log(array1[i][0] + " vs " + array2[i][0]);
-    if (!array1[i][0].localeCompare(array2[i][0])) {  
+    if (!array1[i][0].localeCompare(array2[i][0])) {
       result = result + scores[i];
     }
   }
-  
+
   console.log(result);
   return result;
 }
@@ -135,9 +128,9 @@ function giveTitle(user) {
 
 function updateSkills(languageScore, x, y, z) {
   //const language = document.getElementById('languageScore');
- 
+
   //language.setAttribute('data-percent', 11);
-  
+
   //language.data('data-percent', languageScore);
 }
 
@@ -147,39 +140,65 @@ function updateProfile(user, i) {
   const userTitleIdString = 'user' + i + '-title';
 
   const avatar = document.getElementById(avatarIdString);
-  const name = document.getElementById(nameIdString);
+  const name = document.getElementsByClassName(nameIdString);
   const title = document.getElementById(userTitleIdString);
 
   avatar.src = user.avatar_url;
-  name.innerHTML = user.login;
   title.innerHTML = giveTitle(user);
+
+  for (i = 0; i < name.length; i++) {
+    name[i].innerHTML = user.login;
+  }
+}
+
+function updateLanguagesDetails(languagesStats = {}, j) {
+  /* Sort languages */
+  let array1 = [];
+
+  let i = 0;
+  Object.keys(languagesStats).forEach(key => {
+    array1[i] = [key, languagesStats[key]];
+    i++;
+  });
+
+  array1.sort(function (a, b) {
+    return b[1] - a[1];
+  });
+
+  const language1 = document.getElementById('user' + j + '-language1');
+  const language2 = document.getElementById('user' + j + '-language2');
+  const language3 = document.getElementById('user' + j + '-language3');
+
+  language1.innerHTML = "<i>" + array1[0][0] + ": </i>" + array1[0][1] + "%";
+  language2.innerHTML = "<i>" + array1[1][0] + ": </i>" + array1[1][1] + "%";
+  language3.innerHTML = "<i>" + array1[2][0] + ": </i>" + array1[2][1] + "%";
 }
 
 function updateChart(labels, data) {
   const chartLanguages = document.getElementById('chart-languages');
   const ctx = chartLanguages.getContext('2d');
   const options = {
-      type: 'polarArea',
-      data: {
-          labels,
-          datasets: [{
-              data,
-              backgroundColor: [
-                'rgba(255, 0, 0, 150)',
-                'rgba(0, 255, 0, 150)',
-                'rgba(0, 0, 255, 150)',
-                'rgba(255, 0, 255, 150)',
-              ],
-          }],
+    type: 'polarArea',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: [
+          'rgba(255, 0, 0, 150)',
+          'rgba(0, 255, 0, 150)',
+          'rgba(0, 0, 255, 150)',
+          'rgba(255, 0, 255, 150)',
+        ],
+      }],
+    },
+    options: {
+      legend: {
+        display: true,
+        labels: {
+          fontColor: 'white'
+        },
       },
-      options: {
-          legend: {
-              display: true,
-              labels: {
-                fontColor: 'white'
-              },
-          },      
-      }
+    }
   }
 
   chart = new Chart(ctx, options);
@@ -251,8 +270,8 @@ async function handleSearch(username, i) {
     const languagesLabels = Object.keys(languages);
     const data = languagesLabels.map(label => languages[label]);
     dataCommits.push(commitsData)
-    dataLabels.push(languagesLabels)  
-    let dataLabelMap = {};  
+    dataLabels.push(languagesLabels)
+    let dataLabelMap = {};
     languagesLabels.forEach((key, j) => dataLabelMap[key] = data[j]);
     languagesMap.push(dataLabelMap);
     //console.log(commitsData, languagesLabels, dataLabelMap)
@@ -263,7 +282,13 @@ async function handleSearch(username, i) {
 async function main() {
   await handleSearch(user1, 1);
   await handleSearch(user2, 2);
+
+  /* Sort languages */
+  
+
   updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
+  updateLanguagesDetails(languagesMap[0], 1);
+  updateLanguagesDetails(languagesMap[1], 2);
   updateChart(['un', 'deux', 'trois', 'quatre'], [10, 20, 30, 70]);
   //const language3 = document.getElementById('languageScore');
   //language3.setAttribute('data-percent', 99);
