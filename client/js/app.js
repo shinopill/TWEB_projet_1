@@ -78,8 +78,8 @@ function giveTitle(user) {
 }
 
 function updateProfile(user, i) {
-  const avatarIdString = 'user' + i + '-avatar';
-  const nameIdString = 'user' + i + '-name';
+  const avatarIdString    = 'user' + i + '-avatar';
+  const nameIdString      = 'user' + i + '-name';
   const userTitleIdString = 'user' + i + '-title';
 
   const avatar = document.getElementById(avatarIdString);
@@ -129,8 +129,8 @@ function findNumberOfCommits(user, userRepo) {
 }
 
 var url = new URL(document.URL);
-var user1 = url.searchParams.get("user1");
-var user2 = url.searchParams.get("user2");
+var user1 = url.searchParams.get('user1');
+var user2 = url.searchParams.get('user2');
 
 function handleSearch(username, i) {
   return Promise.all([
