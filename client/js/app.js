@@ -74,37 +74,36 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
   let array1 = [];
   let array2 = [];
   let result = 0;
-
+  
   let i = 0;
   Object.keys(languagesStats1).forEach(key => {
-    console.log(i);
     array1[i] = [key, languagesStats1[key]];
     i++;
   });
 
   i = 0;
   Object.keys(languagesStats2).forEach(key => {
-    console.log(i);
     array2[i] = [key, languagesStats2[key]];
     i++;
   });
-  console.log(array1[0]);
 
   array1.sort(function (a, b) {
-    return a[1] - b[1];
+    return b[1] - a[1];
   });
 
   array2.sort(function (a, b) {
-    return a[1] - b[1];
+    return b[1] - a[1];
   });
 
   let scores = [75, 15, 6, 3, 1];
-  for (i = 0; i < array1.length || i < scores.length; i++) {
-    if (array1[i][0] === array2[i][0]) {
-      result += scores[i];
+  for (i = 0; i < array1.length && i < array1.length && i < scores.length; i++) {
+    console.log(array1[i][0] + " vs " + array2[i][0]);
+    if (!array1[i][0].localeCompare(array2[i][0])) {  
+      result = result + scores[i];
     }
   }
-
+  
+  console.log(result);
   return result;
 }
 
@@ -124,6 +123,12 @@ function giveTitle(user) {
     title = 'BIGBOSS';
   }
   return title;
+}
+
+function updateSkills(languageScore, x, y, z) {
+  const language = document.getElementById('languageScore');
+
+  language.setAttribute('data-percent', languageScore);
 }
 
 function updateProfile(user, i) {
@@ -192,6 +197,7 @@ var user2 = url.searchParams.get('user2');
 let dataCommits = [];
 let dataLabels = [];
 let dataLabelMap = {};
+let languagesMap = [];
 
 async function handleSearch(username, i) {
   return Promise.all([
@@ -206,8 +212,8 @@ async function handleSearch(username, i) {
     dataCommits.push(commitsData)
     dataLabels.push(labels)    
     labels.forEach((key, j) => dataLabelMap[key] = data[j]);
-
-    console.log(commitsData, labels, dataLabelMap)
+    languagesMap.push(dataLabelMap);
+    //console.log(commitsData, labels, dataLabelMap)
 
   })
 }
@@ -215,8 +221,10 @@ async function main() {
 
   await handleSearch(user1, 1);
   await handleSearch(user2, 2);
-  console.log(dataCommits.slice());
-  console.log(dataLabels.slice());
+
+  updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
+  //console.log(dataCommits.slice());
+  //console.log(dataLabels.slice());
   //console.log(dataLabelMap.slice());
 }
 
