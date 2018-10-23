@@ -45,13 +45,13 @@ function getCommits(username, repoName) {
     });
 }
 
-function getLanguage(username,repoName){
-    return fetch(`${baseUrl}/languages/${username}/${repoName}`)
+function getLanguage(username, repoName) {
+  return fetch(`${baseUrl}/languages/${username}/${repoName}`)
     .then((response) => {
-        if (!response.ok) {
-            window.location='http://localhost:8080';
-        }
-        return response.json();
+      if (!response.ok) {
+        window.location = 'http://localhost:8080';
+      }
+      return response.json();
     });
 }
 
@@ -99,8 +99,10 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
   });
 
   let scores = [75, 15, 6, 3, 1];
-  for(i = 0; i < array1.length || i < scores.length; i++) {
-    result += scores[i];
+  for (i = 0; i < array1.length || i < scores.length; i++) {
+    if (array1[i][0] === array2[i][0]) {
+      result += scores[i];
+    }
   }
 
   return result;
@@ -125,8 +127,8 @@ function giveTitle(user) {
 }
 
 function updateProfile(user, i) {
-  const avatarIdString    = 'user' + i + '-avatar';
-  const nameIdString      = 'user' + i + '-name';
+  const avatarIdString = 'user' + i + '-avatar';
+  const nameIdString = 'user' + i + '-name';
   const userTitleIdString = 'user' + i + '-title';
 
   const avatar = document.getElementById(avatarIdString);
@@ -143,36 +145,36 @@ function findNumberOfCommits(user, userRepo) {
 
   let data = [];
 
-    let i = 0 
-    //We get through all the repos found
-    for(; i < userRepo.length; i += 1){
-        let infoRepo = {};
-        infoRepo.repoName = userRepo[i].name;
-        
-        //For each repos we search for the commits
-        getCommits(user,userRepo[i].name).then(commits =>{
-            let totalCommit = 0;
-            let ownCommit = 0;
-            let numberOfcommiter = commits.length
-            infoRepo.numberOfcommiter = numberOfcommiter;
-            //for each commits, we check the author and then we compare with the user
-            for( let j = 0 ; j < numberOfcommiter; j += 1){
-                totalCommit += commits[j].total
-                if(commits[j].author != null && !commits[j].author.login.localeCompare(user)){
-                    ownCommit = commits[j];
-                }
-            }
-            infoRepo.totalCommit = totalCommit;
-            infoRepo.ownCommit = ownCommit;
-        })
-        .catch(err => {
-            console.log(err);
-        })
+  let i = 0
+  //We get through all the repos found
+  for (; i < userRepo.length; i += 1) {
+    let infoRepo = {};
+    infoRepo.repoName = userRepo[i].name;
 
-        data.push(infoRepo)
-    }
+    //For each repos we search for the commits
+    getCommits(user, userRepo[i].name).then(commits => {
+      let totalCommit = 0;
+      let ownCommit = 0;
+      let numberOfcommiter = commits.length
+      infoRepo.numberOfcommiter = numberOfcommiter;
+      //for each commits, we check the author and then we compare with the user
+      for (let j = 0; j < numberOfcommiter; j += 1) {
+        totalCommit += commits[j].total
+        if (commits[j].author != null && !commits[j].author.login.localeCompare(user)) {
+          ownCommit = commits[j];
+        }
+      }
+      infoRepo.totalCommit = totalCommit;
+      infoRepo.ownCommit = ownCommit;
+    })
+      .catch(err => {
+        console.log(err);
+      })
 
-   return data;
+    data.push(infoRepo)
+  }
+
+  return data;
 }
 
 /*function handleSearch(username) {
@@ -188,24 +190,24 @@ var user1 = url.searchParams.get('user1');
 var user2 = url.searchParams.get('user2');
 
 let dataCommits = []
-let dataLabels= []
+let dataLabels = []
 let dataLabelMap = []
 
 async function handleSearch(username, i) {
-   return Promise.all([
-      getRepos(username),
-      getUser(username, i),
-      getLanguages(username),
-  ]).then(([repos,user, languages]) => {
-      updateProfile(user, i);
-      const commitsData = findNumberOfCommits(username,repos)
-      const labels = Object.keys(languages);
-      const data = labels.map(label => languages[label]);
-      dataCommits.push(commitsData)
-      dataLabels.push(labels)
-      dataLabelMap.push(data)
-      console.log(commitsData,labels,data)
-      
+  return Promise.all([
+    getRepos(username),
+    getUser(username, i),
+    getLanguages(username),
+  ]).then(([repos, user, languages]) => {
+    updateProfile(user, i);
+    const commitsData = findNumberOfCommits(username, repos)
+    const labels = Object.keys(languages);
+    const data = labels.map(label => languages[label]);
+    dataCommits.push(commitsData)
+    dataLabels.push(labels)
+    dataLabelMap.push(data)
+    console.log(commitsData, labels, data)
+
   })
 }
 
