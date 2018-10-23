@@ -47,15 +47,16 @@ app.get('/users/:username/:repo/commits', (req, res, next) => {
     .catch(next);
 });
 
-/*app.get('/languages/:owner/:repoName', (req, res, next) => {
+app.get('/languages/:owner/:repoName', (req, res, next) => {
   client.repoLanguages(req.params.owner, req.params.repoName)
     .then(languages => res.send(languages))
     .catch(next);
-});*/
+});
 
 // Forward 404 to error handler
 app.use((req, res, next) => {
-  const error = new Error('Not found');
+  const error = 
+  new Error('Not found');
   error.status = 404;
   next(error);
 });
