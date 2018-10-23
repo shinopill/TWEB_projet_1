@@ -189,9 +189,9 @@ var url = new URL(document.URL);
 var user1 = url.searchParams.get('user1');
 var user2 = url.searchParams.get('user2');
 
-let dataCommits = []
-let dataLabels = []
-let dataLabelMap = []
+let dataCommits = [];
+let dataLabels = [];
+let dataLabelMap = {};
 
 async function handleSearch(username, i) {
   return Promise.all([
@@ -204,9 +204,10 @@ async function handleSearch(username, i) {
     const labels = Object.keys(languages);
     const data = labels.map(label => languages[label]);
     dataCommits.push(commitsData)
-    dataLabels.push(labels)
-    dataLabelMap.push(data)
-    console.log(commitsData, labels, data)
+    dataLabels.push(labels)    
+    labels.forEach((key, j) => dataLabelMap[key] = data[j]);
+
+    console.log(commitsData, labels, dataLabelMap)
 
   })
 }
@@ -216,7 +217,7 @@ async function main() {
   await handleSearch(user2, 2);
   console.log(dataCommits.slice());
   console.log(dataLabels.slice());
-  console.log(dataLabelMap.slice());
+  //console.log(dataLabelMap.slice());
 }
 
 main()
