@@ -219,6 +219,7 @@ async function main(){
   console.log(dataCommits.slice());
   console.log(dataLabels.slice());
   //console.log(dataLabelMap.slice());
+ 
 }
 
 main()
