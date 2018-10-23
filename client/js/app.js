@@ -88,6 +88,14 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
     array2[i] = [key, languagesStats2[key]];
     i++;
   });
+  console.log("ARRAY1 BEFORE:");
+  for(c=0; c<array1.length; c++) {
+    console.log(array1[c]);
+  }
+  console.log("ARRAY2 BEFORE:");
+  for(c=0; c<array2.length; c++) {
+    console.log(array2[c]);
+  }
 
   array1.sort(function (a, b) {
     return b[1] - a[1];
@@ -128,9 +136,17 @@ function giveTitle(user) {
 }
 
 function updateSkills(languageScore, x, y, z) {
+<<<<<<< HEAD
   const language = document.getElementById('languageScore');
   console.log(languageScore)
   language.setAttribute('data-percent', languageScore);
+=======
+  //const language = document.getElementById('languageScore');
+ 
+  //language.setAttribute('data-percent', 11);
+  
+  //language.data('data-percent', languageScore);
+>>>>>>> be4665557564b2a76a9cfc3ba6e41fbe06debc2b
 }
 
 function updateProfile(user, i) {
@@ -147,6 +163,7 @@ function updateProfile(user, i) {
   title.innerHTML = giveTitle(user);
 }
 
+<<<<<<< HEAD
 function scoreLinesAddedAndDeleted(dataCommits){
     let linesAdded = [];
     let linesDeleted = [];
@@ -169,6 +186,39 @@ function scoreLinesAddedAndDeleted(dataCommits){
       linesDeleted.push(deleted)
     }
     
+=======
+function updateChart(labels, data) {
+  const chartLanguages = document.getElementById('chart-languages');
+  const ctx = chartLanguages.getContext('2d');
+  const options = {
+      type: 'polarArea',
+      data: {
+          labels,
+          datasets: [{
+              data,
+              backgroundColor: [
+                'rgba(255, 0, 0, 150)',
+                'rgba(0, 255, 0, 150)',
+                'rgba(0, 0, 255, 150)',
+                'rgba(255, 0, 255, 150)',
+              ],
+          }],
+      },
+      options: {
+          legend: {
+              display: true,
+              labels: {
+                fontColor: 'white'
+              },
+          },      
+      }
+  }
+
+  chart = new Chart(ctx, options);
+  chart.data.labels = options.data.labels;
+  chart.data.datasets = options.data.datasets;
+  chart.update();
+>>>>>>> be4665557564b2a76a9cfc3ba6e41fbe06debc2b
 }
 
 function findNumberOfCommits(user, userRepo) {
@@ -221,7 +271,6 @@ var user2 = url.searchParams.get('user2');
 
 let dataCommits = [];
 let dataLabels = [];
-let dataLabelMap = {};
 let languagesMap = [];
 
 async function handleSearch(username, i) {
