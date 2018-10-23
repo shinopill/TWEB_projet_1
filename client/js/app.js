@@ -35,14 +35,16 @@ function getLanguages(username) {
     });
 }
 
-function getCommits(username, repoName) {
-  return fetch(`${baseUrl}/users/${username}/${repoName}/commits`)
-    .then((response) => {
-      if (!response.ok) {
-        window.location = 'http://localhost:8080';
-      }
-      return response.json();
-    });
+async function getCommits(username, repoName) {
+  let v ;
+  try{
+    v = await fetch(`${baseUrl}/users/${username}/${repoName}/commits`)
+  } catch(e){
+    window.location = 'http://localhost:8080'
+  }
+  let data = await v.json()
+  return data;
+  
 }
 
 function getLanguage(username, repoName) {
@@ -127,7 +129,7 @@ function giveTitle(user) {
 
 function updateSkills(languageScore, x, y, z) {
   const language = document.getElementById('languageScore');
-
+  console.log(languageScore)
   language.setAttribute('data-percent', languageScore);
 }
 
@@ -145,6 +147,29 @@ function updateProfile(user, i) {
   title.innerHTML = giveTitle(user);
 }
 
+function scoreLinesAddedAndDeleted(dataCommits){
+    let linesAdded = [];
+    let linesDeleted = [];
+
+    for(let nbUser = 0 ; nbUser < 2 ; nbUser += 1){
+      let added = 0 ;
+      let deleted = 0; 
+      let i = 0;
+      console.log(JSON.stringify(dataCommits[nbUser]))
+      for(; i < dataCommits[nbUser].length; i += 1){
+        if( dataCommits[nbUser][i].ownCommit !== 0){
+          dataCommits[nbUser][i].ownCommit.weeks.forEach(data => {
+            added += data.a;
+            deleted += data.d
+          })
+        }
+      }
+
+      linesAdded.push(added);
+      linesDeleted.push(deleted)
+    }
+    
+}
 
 function findNumberOfCommits(user, userRepo) {
 
@@ -158,6 +183,7 @@ function findNumberOfCommits(user, userRepo) {
 
     //For each repos we search for the commits
     getCommits(user, userRepo[i].name).then(commits => {
+      console.log(commits)
       let totalCommit = 0;
       let ownCommit = 0;
       let numberOfcommiter = commits.length
@@ -171,16 +197,15 @@ function findNumberOfCommits(user, userRepo) {
       }
       infoRepo.totalCommit = totalCommit;
       infoRepo.ownCommit = ownCommit;
-    })
-      .catch(err => {
+    }).catch(err => {
         console.log(err);
       })
 
     data.push(infoRepo)
   }
-
-  return data;
+  return data
 }
+
 
 /*function handleSearch(username) {
     return Promise.all([
@@ -200,37 +225,46 @@ let dataLabelMap = {};
 let languagesMap = [];
 
 async function handleSearch(username, i) {
-  return Promise.all([
-    getRepos(username),
-    getUser(username, i),
-    getLanguages(username),
-  ]).then(([repos, user, languages]) => {
-    updateProfile(user, i);
-    const commitsData = findNumberOfCommits(username, repos)
-    const labels = Object.keys(languages);
-    const data = labels.map(label => languages[label]);
-    dataCommits.push(commitsData)
-    dataLabels.push(labels)    
-    labels.forEach((key, j) => dataLabelMap[key] = data[j]);
-    languagesMap.push(dataLabelMap);
-    //console.log(commitsData, labels, dataLabelMap)
 
-  })
+ 
+  let [repos, user, languages] = await Promise.all([  getRepos(username),  getUser(username, i), getLanguages(username)])
+  
+  console.log([repos, user, languages])
+  updateProfile(user, i);
+
+    
+  const commitsData =  findNumberOfCommits(username, repos)
+  const labels = Object.keys(languages);
+  const data = labels.map(label => languages[label]);
+  dataCommits.push(commitsData)
+  dataLabels.push(labels)    
+  labels.forEach((key, j) => dataLabelMap[key] = data[j]);
+  languagesMap.push(dataLabelMap);
+  console.log("ended ")
+  console.log(dataCommits)
+
+  
+  return "Done"
 }
 
 async function main(){
-
-  await handleSearch(user1, 1);
-  await handleSearch(user2, 2);
-
-  updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
-  //console.log(dataCommits.slice());
-  //console.log(dataLabels.slice());
-  //console.log(dataLabelMap.slice());
- 
+    const t =  await handleSearch(user1, 1)
+    const v = await handleSearch(user2, 2)
+    console.log(t,v )
+    return t
 }
 
-main()
+main().then(() => {
+  console.log(dataCommits.slice());
+  console.log(t,w)
+  console.log("test")
+ scoreLinesAddedAndDeleted(dataCommits);
+// updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
+
+console.log(dataCommits.slice());
+//console.log(dataLabels.slice());
+//console.log(dataLabelMap.slice());
+})
 
 /*getUser(user1)
   .then(user => {
