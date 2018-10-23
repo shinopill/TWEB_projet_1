@@ -117,7 +117,7 @@ function findNumberOfCommits(user, userRepo) {
       }
       infoRepo.totalCommit = totalCommit;
       infoRepo.ownCommit = ownCommit;
-      console.log(commits)
+      //console.log(commits)
     })
       .catch(err => {
         console.log(err);
@@ -128,19 +128,26 @@ function findNumberOfCommits(user, userRepo) {
   return data;
 }
 
-/*function handleSearch(username) {
-    return Promise.all([
-        getUser(username),
-    ]).then(([user]) => {
-        updateProfile(user);
-    })
-}*/
-
 var url = new URL(document.URL);
 var user1 = url.searchParams.get("user1");
 var user2 = url.searchParams.get("user2");
 
-getUser(user1)
+function handleSearch(username, i) {
+  return Promise.all([
+      getUser(username, i),
+      getLanguages(username),
+  ]).then(([user, languages]) => {
+      updateProfile(user, i);
+
+      const labels = Object.keys(languages);
+      const data = labels.map(label => languages[label]);
+  })
+}
+
+handleSearch(user1, 1);
+handleSearch(user2, 2);
+
+/*getUser(user1)
   .then(user => {
     updateProfile(user, 1);
   })
@@ -148,12 +155,11 @@ getUser(user1)
 getUser(user2)
   .then(user => {
     updateProfile(user, 2);
-  })
-
+  })*/
 
 getRepos(user1)
   .then(repo => {
     //We get all the commits done by the user
     let data = findNumberOfCommits(user1, repo);
-    console.log(data);
+    //console.log(data);
   })
