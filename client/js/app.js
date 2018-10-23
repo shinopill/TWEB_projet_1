@@ -86,6 +86,14 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
     array2[i] = [key, languagesStats2[key]];
     i++;
   });
+  console.log("ARRAY1 BEFORE:");
+  for(c=0; c<array1.length; c++) {
+    console.log(array1[c]);
+  }
+  console.log("ARRAY2 BEFORE:");
+  for(c=0; c<array2.length; c++) {
+    console.log(array2[c]);
+  }
 
   array1.sort(function (a, b) {
     return b[1] - a[1];
@@ -126,9 +134,11 @@ function giveTitle(user) {
 }
 
 function updateSkills(languageScore, x, y, z) {
-  const language = document.getElementById('languageScore');
-
-  language.setAttribute('data-percent', languageScore);
+  //const language = document.getElementById('languageScore');
+ 
+  //language.setAttribute('data-percent', 11);
+  
+  //language.data('data-percent', languageScore);
 }
 
 function updateProfile(user, i) {
@@ -145,6 +155,29 @@ function updateProfile(user, i) {
   title.innerHTML = giveTitle(user);
 }
 
+function updateChart(labels, data) {
+  const chartLanguages = document.getElementById('chart-languages');
+  const ctx = chartLanguages.getContext('2d');
+  const options = {
+      type: 'polarArea',
+      data: {
+          labels,
+          datasets: [{
+              data
+          }],
+      },
+      options: {
+          legend: {
+              display: true
+          },
+      }
+  }
+
+  chart = new Chart(ctx, options);
+  chart.data.labels = options.data.labels;
+  chart.data.datasets = options.data.datasets;
+  chart.update();
+}
 
 function findNumberOfCommits(user, userRepo) {
 
@@ -196,7 +229,6 @@ var user2 = url.searchParams.get('user2');
 
 let dataCommits = [];
 let dataLabels = [];
-let dataLabelMap = {};
 let languagesMap = [];
 
 async function handleSearch(username, i) {
@@ -207,28 +239,34 @@ async function handleSearch(username, i) {
   ]).then(([repos, user, languages]) => {
     updateProfile(user, i);
     const commitsData = findNumberOfCommits(username, repos)
-    const labels = Object.keys(languages);
-    const data = labels.map(label => languages[label]);
+    const languagesLabels = Object.keys(languages);
+    const data = languagesLabels.map(label => languages[label]);
     dataCommits.push(commitsData)
-    dataLabels.push(labels)    
-    labels.forEach((key, j) => dataLabelMap[key] = data[j]);
+    dataLabels.push(languagesLabels)  
+    let dataLabelMap = {};  
+    languagesLabels.forEach((key, j) => dataLabelMap[key] = data[j]);
     languagesMap.push(dataLabelMap);
-    //console.log(commitsData, labels, dataLabelMap)
+    //console.log(commitsData, languagesLabels, dataLabelMap)
 
   })
 }
-async function main() {
 
+async function main() {
   await handleSearch(user1, 1);
   await handleSearch(user2, 2);
-
   updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
+  updateChart(['un', 'deux', 'trois'], [10, 20, 30]);
+  //const language3 = document.getElementById('languageScore');
+  //language3.setAttribute('data-percent', 99);
+  //language3.innerHTML = "<span class=\"percent\">99</span><canvas height=\"206\" width=\"206\" style=\"height: 150px; width: 150px;\"></canvas>";
   //console.log(dataCommits.slice());
   //console.log(dataLabels.slice());
   //console.log(dataLabelMap.slice());
 }
 
-main()
+main();
+
+
 
 /*getUser(user1)
   .then(user => {
