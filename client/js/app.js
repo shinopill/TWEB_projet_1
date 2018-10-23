@@ -1,4 +1,5 @@
 //const fetch = require('node-fetch');
+//import { calculateLanguagesCompatibility } from './module';
 
 const baseUrl = window.location.hostname === 'localhost'
   ? 'http://localhost:3000'
@@ -77,9 +78,46 @@ function giveTitle(user) {
   return title;
 }
 
+function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 = {}) {
+  let array1 = [];
+  let array2 = [];
+  let result = 0;
+
+  let i = 0;
+  Object.keys(languagesStats1).forEach(key => {
+    console.log(i);
+    array1[i] = [key, languagesStats1[key]];
+    i++;
+  });
+
+  i = 0;
+  Object.keys(languagesStats2).forEach(key => {
+    console.log(i);
+    array2[i] = [key, languagesStats2[key]];
+    i++;
+  });
+  console.log(array1[0]);
+
+  array1.sort(function (a, b) {
+    return a[1] - b[1];
+  });
+
+  array2.sort(function (a, b) {
+    return a[1] - b[1];
+  });
+
+  let scores = [75, 15, 6, 3, 1];
+  for(i = 0; i < array1.length || i < scores.length; i++) {
+    result += scores[i];
+  }
+
+  return result;
+}
+
+
 function updateProfile(user, i) {
-  const avatarIdString    = 'user' + i + '-avatar';
-  const nameIdString      = 'user' + i + '-name';
+  const avatarIdString = 'user' + i + '-avatar';
+  const nameIdString = 'user' + i + '-name';
   const userTitleIdString = 'user' + i + '-title';
 
   const avatar = document.getElementById(avatarIdString);
@@ -129,23 +167,25 @@ function findNumberOfCommits(user, userRepo) {
 }
 
 var url = new URL(document.URL);
-var user1 = url.searchParams.get('user1');
-var user2 = url.searchParams.get('user2');
+var users = [url.searchParams.get('user1'), url.searchParams.get('user2')];
+let usersLanguages = [];
 
 function handleSearch(username, i) {
   return Promise.all([
-      getUser(username, i),
-      getLanguages(username),
+    getUser(username, i),
+    getLanguages(username),
   ]).then(([user, languages]) => {
-      updateProfile(user, i);
+    updateProfile(user, i);
 
-      const labels = Object.keys(languages);
-      const data = labels.map(label => languages[label]);
+    const labels = Object.keys(languages);
+    usersLanguages[i - 1] = labels.map(label => languages[label]);
+    //const data = labels.map(label => languages[label]);      
   })
 }
 
-handleSearch(user1, 1);
-handleSearch(user2, 2);
+handleSearch(users[0], 1)
+  .then(handleSearch(users[1], 2))
+  .then(calculateLanguagesCompatibility(usersLanguages[0], usersLanguages[1]));
 
 /*getUser(user1)
   .then(user => {
@@ -157,9 +197,9 @@ getUser(user2)
     updateProfile(user, 2);
   })*/
 
-getRepos(user1)
+getRepos(users[0])
   .then(repo => {
     //We get all the commits done by the user
-    let data = findNumberOfCommits(user1, repo);
+    let data = findNumberOfCommits(users[0], repo);
     //console.log(data);
   })
