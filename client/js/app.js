@@ -70,6 +70,42 @@ function countRepos(user) {
   return c;
 }
 
+function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 = {}) {
+  let array1 = [];
+  let array2 = [];
+  let result = 0;
+
+  let i = 0;
+  Object.keys(languagesStats1).forEach(key => {
+    console.log(i);
+    array1[i] = [key, languagesStats1[key]];
+    i++;
+  });
+
+  i = 0;
+  Object.keys(languagesStats2).forEach(key => {
+    console.log(i);
+    array2[i] = [key, languagesStats2[key]];
+    i++;
+  });
+  console.log(array1[0]);
+
+  array1.sort(function (a, b) {
+    return a[1] - b[1];
+  });
+
+  array2.sort(function (a, b) {
+    return a[1] - b[1];
+  });
+
+  let scores = [75, 15, 6, 3, 1];
+  for(i = 0; i < array1.length || i < scores.length; i++) {
+    result += scores[i];
+  }
+
+  return result;
+}
+
 function giveTitle(user) {
   const numberOfRepos = countRepos(user);
 
@@ -115,7 +151,6 @@ function findNumberOfCommits(user, userRepo) {
         
         //For each repos we search for the commits
         getCommits(user,userRepo[i].name).then(commits =>{
-            console.log(commits)
             let totalCommit = 0;
             let ownCommit = 0;
             let numberOfcommiter = commits.length
@@ -140,29 +175,6 @@ function findNumberOfCommits(user, userRepo) {
    return data;
 }
 
-function doUpdatesForLanguages(user,userRepo){
-    
-    
-    let data = [];
-    let dataToSend = []
-    let mapLanguages = new Map()
-    let i = 0 
-    let values = {};
-    
-   
-    //We get through all the repos found
-    for(; i < userRepo.length; i += 1){
-       data.push(getLanguage(user,userRepo[i].name))
-    }   
-
-    
-    Promise.all(data).then(languages =>{
-             dataToSend.push(languages)
-    });
-    
-    
-    return data;
-}   
 /*function handleSearch(username) {
     return Promise.all([
         getUser(username),
@@ -175,20 +187,37 @@ var url = new URL(document.URL);
 var user1 = url.searchParams.get('user1');
 var user2 = url.searchParams.get('user2');
 
-function handleSearch(username, i) {
-  return Promise.all([
+let dataCommits = []
+let dataLabels= []
+let dataLabelMap = []
+
+async function handleSearch(username, i) {
+   return Promise.all([
+      getRepos(username),
       getUser(username, i),
       getLanguages(username),
-  ]).then(([user, languages]) => {
+  ]).then(([repos,user, languages]) => {
       updateProfile(user, i);
-
+      const commitsData = findNumberOfCommits(username,repos)
       const labels = Object.keys(languages);
       const data = labels.map(label => languages[label]);
+      dataCommits.push(commitsData)
+      dataLabels.push(labels)
+      dataLabelMap.push(data)
+      console.log(commitsData,labels,data)
+      
   })
 }
+async function main(){
 
-handleSearch(user1, 1);
-handleSearch(user2, 2);
+  await handleSearch(user1, 1);
+  await handleSearch(user2, 2);
+  console.log(dataCommits.slice());
+  console.log(dataLabels.slice());
+  console.log(dataLabelMap.slice());
+}
+
+main()
 
 /*getUser(user1)
   .then(user => {
@@ -210,11 +239,12 @@ getRepos(user1)
     })
 
 */
+/*
  getRepos(user1)
     .then(repo => {
         //We get all the commits done by the user
         let rip = doUpdatesForLanguages(user1,repo);
-        console.log(rip)
+        //console.log(rip)
         
     })
-
+*/
