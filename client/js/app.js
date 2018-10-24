@@ -136,17 +136,14 @@ function giveTitle(user) {
 }
 
 function updateSkills(languageScore, x, y, z) {
-<<<<<<< HEAD
   const language = document.getElementById('languageScore');
   console.log(languageScore)
   language.setAttribute('data-percent', languageScore);
-=======
   //const language = document.getElementById('languageScore');
  
   //language.setAttribute('data-percent', 11);
   
   //language.data('data-percent', languageScore);
->>>>>>> be4665557564b2a76a9cfc3ba6e41fbe06debc2b
 }
 
 function updateProfile(user, i) {
@@ -163,8 +160,8 @@ function updateProfile(user, i) {
   title.innerHTML = giveTitle(user);
 }
 
-<<<<<<< HEAD
-function scoreLinesAddedAndDeleted(dataCommits){
+
+function scoreLinesAddedAndDeleted(commits){
     let linesAdded = [];
     let linesDeleted = [];
 
@@ -172,10 +169,10 @@ function scoreLinesAddedAndDeleted(dataCommits){
       let added = 0 ;
       let deleted = 0; 
       let i = 0;
-      console.log(JSON.stringify(dataCommits[nbUser]))
-      for(; i < dataCommits[nbUser].length; i += 1){
-        if( dataCommits[nbUser][i].ownCommit !== 0){
-          dataCommits[nbUser][i].ownCommit.weeks.forEach(data => {
+      console.log(JSON.stringify(commits[nbUser]))
+      for(; i < commits[nbUser].length; i += 1){
+        if( commits[nbUser][i].ownCommit !== 0){
+          commits[nbUser][i].ownCommit.weeks.forEach(data => {
             added += data.a;
             deleted += data.d
           })
@@ -185,8 +182,7 @@ function scoreLinesAddedAndDeleted(dataCommits){
       linesAdded.push(added);
       linesDeleted.push(deleted)
     }
-    
-=======
+}    
 function updateChart(labels, data) {
   const chartLanguages = document.getElementById('chart-languages');
   const ctx = chartLanguages.getContext('2d');
@@ -218,7 +214,6 @@ function updateChart(labels, data) {
   chart.data.labels = options.data.labels;
   chart.data.datasets = options.data.datasets;
   chart.update();
->>>>>>> be4665557564b2a76a9cfc3ba6e41fbe06debc2b
 }
 
 function findNumberOfCommits(user, userRepo) {
@@ -253,7 +248,8 @@ function findNumberOfCommits(user, userRepo) {
 
     data.push(infoRepo)
   }
-  return data
+
+ return data
 }
 
 
@@ -273,22 +269,25 @@ let dataCommits = [];
 let dataLabels = [];
 let languagesMap = [];
 
-async function handleSearch(username, i) {
+async function handleSearch(username, username2, i,j) {
 
  
-  let [repos, user, languages] = await Promise.all([  getRepos(username),  getUser(username, i), getLanguages(username)])
+  let [repos,repos2, user,user2, languages,languages2] = await Promise.all([  getRepos(username),getRepos(username2) , getUser(username, i), getUser(username2,j) ,getLanguages(username),getLanguages(username2)])
   
-  console.log([repos, user, languages])
+
   updateProfile(user, i);
+  updateProfile(user2,j)
 
     
-  const commitsData =  findNumberOfCommits(username, repos)
+  const dataCommits1=  await findNumberOfCommits(username, repos)
+  const dataCommits2 = await findNumberOfCommits(username2, repos2)
+
   const labels = Object.keys(languages);
   const data = labels.map(label => languages[label]);
-  dataCommits.push(commitsData)
-  dataLabels.push(labels)    
-  labels.forEach((key, j) => dataLabelMap[key] = data[j]);
-  languagesMap.push(dataLabelMap);
+  dataCommits.push(dataCommits1)
+  dataCommits.push(dataCommits2)
+  
+  
   console.log("ended ")
   console.log(dataCommits)
 
@@ -296,24 +295,15 @@ async function handleSearch(username, i) {
   return "Done"
 }
 
-async function main(){
-    const t =  await handleSearch(user1, 1)
-    const v = await handleSearch(user2, 2)
-    console.log(t,v )
+function main(){
+    const t =  handleSearch(user1,user2, 1,2)
+    
+   scoreLinesAddedAndDeleted(dataCommits);
+   updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
     return t
 }
 
-main().then(() => {
-  console.log(dataCommits.slice());
-  console.log(t,w)
-  console.log("test")
- scoreLinesAddedAndDeleted(dataCommits);
-// updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
-
-console.log(dataCommits.slice());
-//console.log(dataLabels.slice());
-//console.log(dataLabelMap.slice());
-})
+main()
 
 /*getUser(user1)
   .then(user => {
