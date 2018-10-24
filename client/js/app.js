@@ -272,7 +272,7 @@ let languagesMap = [];
 async function handleSearch(username, username2, i,j) {
 
  
-  let [repos,repos2, user,user2, languages,languages2] = await Promise.all([  getRepos(username),getRepos(username2) , getUser(username, i), getUser(username2,j) ,getLanguages(username),getLanguages(username2)])
+  let [repos,repos2, user,user2, languages,languages2] = await Promise.all([  getRepos(username),getRepos(username2) , getUser(username, i), getUser(username2,j) ,getLanguages(username),getLanguage(username2)])
   
 
   updateProfile(user, i);
@@ -284,9 +284,8 @@ async function handleSearch(username, username2, i,j) {
 
   const labels = Object.keys(languages);
   const data = labels.map(label => languages[label]);
-  dataCommits.push(dataCommits1)
   dataCommits.push(dataCommits2)
-  
+  dataCommits.push(dataCommits1)
   
   console.log("ended ")
   console.log(dataCommits)
@@ -295,8 +294,8 @@ async function handleSearch(username, username2, i,j) {
   return "Done"
 }
 
-function main(){
-    const t =  handleSearch(user1,user2, 1,2)
+async function main(){
+    const t =  await handleSearch(user1,user2, 1,2)
     
    scoreLinesAddedAndDeleted(dataCommits);
    updateSkills(calculateLanguagesCompatibility(languagesMap[0], languagesMap[1]), 0, 0, 0);
