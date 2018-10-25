@@ -12,6 +12,7 @@
                 $(".se-pre-con").fadeOut("slow");;
             });-->
 
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
@@ -45,23 +46,7 @@
 </head>
 
 <body>
-    <!--<div class="se-pre-con"></div>-->
-    <div class="switcher" style="left:-50px;">
-        <a id="switch-panel" class="hide-panel">
-            <i class="fa fa-desktop"></i>
-
-        </a>
-        <p style="font-size:10px">choose</p>
-        <ul class="colors-list">
-            <li><a title="Pink" id="pink" class="pink"></a></li>
-            <li><a title="Green" id="green" class="green"></a></li>
-            <li><a title="Blue" id="blue" class="blue"></a></li>
-            <li><a title="Brown" id="brown" class="brown"></a></li>
-
-        </ul>
-    </div>
-    <!-- /. END THEME SWITCHER-->
-
+ 
     <div id="home-sec">
         <div class="overlay">
             <div class="container">
@@ -69,27 +54,27 @@
                     <div class="col-lg-5 col-md-5 col-sm-5 text-center">
                         <img id="user1-avatar" class="main-img img-circle wow bounceIn animated" data-wow-duration="1s"
                             data-wow-delay=".2s" alt="" />
-                        <h1 class="user1-name" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s"></h1>
+                        <h1 id="user1-name" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s"></h1>
                         <h2 id="user1-title" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".6s"></h2>
 
                     </div>
 
                     <div class="col-lg-2 col-md-2 col-sm-2 text-center">
-                        <h1 id="compatibilityScore">55%</h1>
-                        <i class="fas fa-heart"></i>
-                        <i class="fas fa-heart"></i>
-                        <i class="fas fa-heart"></i>
+                        <h1 id="compatibilityScore"></h1>
                         <i class="far fa-heart"></i>
                         <i class="far fa-heart"></i>
-                        <h2 id="compatibilityTitle">meh..</h2>
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-heart"></i>
+                        <h2 id="compatibilityTitle"></h2>
                         <a href="#skill-sec" class="btn custom-btn-one btn-lg wow bounceIn animated" data-wow-duration="1s"
-                            data-wow-delay=".8s">MORE DETAILS</a>
+                            data-wow-delay=".8s" >MORE DETAILS</a>
                     </div>
 
                     <div class="col-lg-5 col-md-5 col-sm-5 text-center">
                         <img id="user2-avatar" class="main-img-2 img-circle wow bounceIn animated" data-wow-duration="1s"
                             data-wow-delay=".2s" alt="" />
-                        <h1 class="user2-name" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s"></h1>
+                        <h1 id="user2-name" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s"></h1>
                         <h2 id="user2-title" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".6s"></h2>
 
                     </div>
@@ -104,31 +89,6 @@
         <div class="overlay">
             <div class="container">
                 <div class="row pad-top-bottom move-me">
-                    <!--<div class="col-lg-2 col-md-2 col-sm-2 text-center wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".2s">
-                        <span id="languageScore" class="chart" data-percent="0">
-                            <span class="percent"></span>
-                        </span>
-                        <h4>LANGUAGES</h4>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 text-center wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s">
-                        <span class="chart" data-percent="80">
-                            <span class="percent"></span>
-                        </span>
-                        <h4>???</h4>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 text-center  wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".6s">
-                        <span class="chart" data-percent="95">
-                            <span class="percent"></span>
-                        </span>
-                        <h4>???</h4>
-                    </div>
-
-                    <div class="col-lg-2 col-md-2 col-sm-2 text-center wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".8s">
-                        <span class="chart" data-percent="5">
-                            <span class="percent"></span>
-                        </span>
-                        <h4>???</h4>
-                    </div>-->
                     <div class="chartchart">
                         <canvas id="chart-languages"></canvas>
                     </div>
@@ -136,10 +96,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-4  wow bounceIn animated" data-wow-duration="1s"
                         data-wow-delay="1s">
                         <h1>COMPATIBILTY SCORE</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Nulla pretium lectus vel justo iaculis blandit.
-                        </p>
+                        
                         <a href="#resume-sec" class="btn btn-style-two btn-lg">RESULTS EXPLANATIONS</a>
                     </div>
                 </div>
@@ -163,25 +120,25 @@
                                 <li class="active">
                                     <a href="#home" data-toggle="tab" title="LANGUAGES DETAILS">
                                         <span class="round-tabs one">
-                                            <i class="fa fa-home"></i>
+                                            <img src="assets/img/java.png"/>
                                         </span>
                                     </a></li>
 
-                                <li><a href="#profile" data-toggle="tab" title="EDUCATIONAL PROFILE">
+                                <li><a href="#profile" data-toggle="tab" title="COMMITS DETAILS ">
                                         <span class="round-tabs two">
-                                            <i class="fa fa-briefcase"></i>
+                                            <img src="assets/img/Octocat.png"/>
                                         </span>
                                     </a>
                                 </li>
-                                <li><a href="#exp" data-toggle="tab" title="EXPERIENCE DETAILS">
+                                <li><a href="#exp" data-toggle="tab" title="TEAM SIZE DETAILS">
                                         <span class="round-tabs three">
-                                            <i class="fa fa-recycle"></i>
+                                            <img src="assets/img/teamwork-logo-14411016.jpg"/>
                                         </span></a>
                                 </li>
 
-                                <li><a href="#location" data-toggle="tab" title="PRESENT LOCATION">
+                                <li><a href="#location" data-toggle="tab" title="CODING DETAILS">
                                         <span class="round-tabs four">
-                                            <i class="fa fa-paper-plane-o"></i>
+                                            <img src="assets/img/mrCode.png"/>
                                         </span>
                                     </a></li>
                             </ul>
@@ -189,62 +146,65 @@
 
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="home">
-
                                 <h4 class="head text-center">LANGUAGES DETAILS</h4>
+                           
                                 <p class="narrow text-center">
-                                    <h3 class="user1-name"></h3>
+                                    <h3 class="user1-class"></h3>
                                     <span id="user1-language1"></span>
                                     <span id="user1-language2"></span>
                                     <span id="user1-language3"></span>
 
-                                    <h3 class="user2-name"></h3>
+                        
+                           
+                                    <h3 class="user2-class"></h3>
                                     <span id="user2-language1"></span>
                                     <span id="user2-language2"></span>
                                     <span id="user2-language3"></span>
-                                </p>
+                                    
+                                    </p>
+                            </div>
+                            <div class="tab-pane fade linesDisplay" id="profile">
 
-                            </div>
-                            <div class="tab-pane fade" id="profile">
-
-                                <h4 class="head text-center">??? DETAILS</h4>
+                                <h4 class="head text-center">COMMITS DETAILS </h4>
                                 <p class="narrow text-center">
-                                    <span>
-                                        <i>TECHINICAL : </i>B.E. ( Computer Science )
-                                    </span>
-                                    <span>
-                                        <i>SKILLS :</i>HTML, CSS , PHP, JQUERY, etc.
-                                    </span>
-                                    <span>
-                                        <i>SOFTWARES :</i>PHOTOSHOP, MAYA, etc.
-                                    </span>
+                                 
+                                        <h3 class="user1-class"></h3>
+                                        <span id="user1-commits1"></span>
+                                        <span id="user1-commits2"></span>
+                                        <span id="user1-commits3"></span>
+    
+                                        <h3 class="user2-class"></h3>
+                                        <span id="user2-commits1"></span>
+                                        <span id="user2-commits2"></span>
+                                        <span id="user2-commits3"></span>
                                 </p>
                             </div>
-                            <div class="tab-pane fade" id="exp">
-                                <h4 class="head text-center">??? DETAILS</h4>
+                            <div class="tab-pane fade linesDisplay" id="exp">
+                                <h4 class="head text-center">COWORKERS DETAILS</h4>
                                 <p class="narrow text-center">
-                                    <span>
-                                        <i>MICROSOFT : </i>2013 - TILL DATE as SR. UI DESIGNER
-                                    </span>
-                                    <span>
-                                        <i>MAYA ANIMATIONS : </i>2010 - 2013 as UI DESIGNER
-                                    </span>
-                                    <span>
-                                        <i>JALSON CREATIVES :</i>2009 - 2010 as DEVELOPER.
-                                    </span>
+                                    <h3 class="user1-class"></h3>
+                                        <span id="user1-coworkers1"></span>
+                                        <span id="user1-coworkers2"></span>
+                                        <span id="user1-coworkers3"></span>
+    
+                                        <h3 class="user2-class"></h3>
+                                        <span id="user2-coworkers1"></span>
+                                        <span id="user2-coworkers2"></span>
+                                        <span id="user2-coworkers3"></span>
                                 </p>
                             </div>
-                            <div class="tab-pane fade" id="location">
-                                <h4 class="head text-center">??? DETAILS</h4>
+                            <div class="tab-pane fade linesDisplay" id="location">
+                                <h4 class="head text-center">CODE DETAILS</h4>
                                 <p class="narrow text-center">
-                                    <span>
-                                        <i>LOCALITY </i>243/90 - NEW YORK STREET
-                                    </span>
-                                    <span>
-                                        <i>COUNTRY </i>UNITED STATES OF AMERICA
-                                    </span>
-                                    <span>
-                                        <i>PIN </i>345-908-00
-                                    </span>
+                                    <h3 class="user1-class"></h3>
+                                        <span id="user1-lines1"></span>
+                                        <span id="user1-lines2"></span>
+                                        <span id="user1-lines3"></span>
+    
+                                        <h3 class="user2-class"></h3>
+                                        <span id="user2-lines1"></span>
+                                        <span id="user2-lines2"></span>
+                                        <span id="user2-lines3"></span>
                                 </p>
                             </div>
 
@@ -256,70 +216,7 @@
         </div>
     </section>
 
-    <!-- RESUME SECTION END-->
-    <section id="testimonial-main">
-        <div class="overlay">
-            <div class="container">
-                <div class="row pad-top-bottom wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".2s">
-                    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                        <h1>PERSONNAL ADVICES</h1>
-
-                        <div id="testimonials" class="carousel slide" data-ride="carousel">
-
-                            <ol class="carousel-indicators">
-                                <li data-target="#testimonials" data-slide-to="0" class=""></li>
-                                <li data-target="#testimonials" data-slide-to="1" class="active"></li>
-                                <li data-target="#testimonials" data-slide-to="2" class=""></li>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <div class="item">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-
-                                            <h4><i class="fa fa-quote-left"></i>Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit onec molestie non sem vel condimentum. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="assets/img/user2.png" alt="" class="img-circle image-responsive" />
-                                            </div>
-                                            <h5 class="pull-right">Lorem Dolor</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-                                            <h4><i class="fa fa-quote-left"></i>Aenean faucibus luctus enim. Duis quis
-                                                sem risu suspend lacinia elementum nunc. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="assets/img/user.gif" alt="" class="img-circle image-responsive" />
-                                            </div>
-                                            <h5 class="pull-right">Faucibus luctus</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="container center">
-                                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 slide-custom">
-                                            <h4><i class="fa fa-quote-left"></i>Sed ultricies, libero ut adipiscing
-                                                fringilla, ante elit luctus lorem, a egestas dui metus a arcu
-                                                condimentum. <i class="fa fa-quote-right"></i></h4>
-                                            <div class="user-img pull-right">
-                                                <img src="assets/img/user2.png" alt="" class="img-circle image-responsive" />
-                                            </div>
-                                            <h5 class="pull-right">Sed ultricies</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- TESTIMONIAL SECTION END-->
+    
 
     <div class="move-me">
         <a href="#home-sec" class="scrollup"><i class="fa fa-chevron-up"></i></a>
