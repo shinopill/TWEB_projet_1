@@ -12,16 +12,6 @@ const client = new Github({ token: process.env.OAUTH_TOKEN});
 // Enable CORS for the client app
 app.use(cors());
 
-/*app.use((req, res, next) => {
-  console.log('log1');
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('log2');
-  next();
-});*/
-
 app.get('/users/:username', (req, res, next) => {
   client.user(req.params.username)
     .then(user => res.send(user))

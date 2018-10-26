@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        
+        //paste this code under the head tag or in a separate js file.
+            // Wait for window load
+            $(window).load(function() {
+                // Animate loader off screen
+                $(".se-pre-con").fadeOut("slow");;
+            });-->
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Github Soulmate Calculator</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME CSS -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- ANIMATE  CSS -->
+    <link href="assets/css/animate.css" rel="stylesheet" />
+    <!-- PRETTY PHOTO  CSS -->
+    <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
+    <!--  STYLE SWITCHER CSS -->
+    <link href="assets/css/styleSwitcher.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE CSS -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!--PINK STYLE VERSION IS BY DEFAULT, USE ANY ONE STYLESHEET FROM FOUR STYLESHEETS (pink,green,blue and brown) HERE-->
+    <link href="assets/css/themes/pink.css" id="mainCSS" rel="stylesheet" />
+    <!-- GOOGLE FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+    <!-- SOME ICONS (HEART) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+
+
+
+</head>
+
+<body>
+ 
+    <div id="home-sec">
+        <div class="overlay">
+            <div class="container">
+                <div class="row pad-top-bottom  move-me">
+                    <div class="col-lg-5 col-md-5 col-sm-5 text-center">
+                        <img id="user1-avatar" class="main-img img-circle wow bounceIn animated" data-wow-duration="1s"
+                            data-wow-delay=".2s" alt="" />
+                        <h1 id="user1-name" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s"></h1>
+                        <h2 id="user1-title" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".6s"></h2>
+
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 text-center">
+                        <h1 id="compatibilityScore"></h1>
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-heart"></i>
+                        <h2 id="compatibilityTitle"></h2>
+                        <a href="#skill-sec" class="btn custom-btn-one btn-lg wow bounceIn animated" data-wow-duration="1s"
+                            data-wow-delay=".8s" >MORE DETAILS</a>
+                    </div>
+
+                    <div class="col-lg-5 col-md-5 col-sm-5 text-center">
+                        <img id="user2-avatar" class="main-img-2 img-circle wow bounceIn animated" data-wow-duration="1s"
+                            data-wow-delay=".2s" alt="" />
+                        <h1 id="user2-name" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s"></h1>
+                        <h2 id="user2-title" class="wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".6s"></h2>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- HOME SECTION END-->
+
+    <section id="skill-sec">
+        <div class="overlay">
+            <div class="container">
+                <div class="row pad-top-bottom move-me">
+                    <div class="chartchart">
+                        <canvas id="chart-languages"></canvas>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4  wow bounceIn animated" data-wow-duration="1s"
+                        data-wow-delay="1s">
+                        <h1>COMPATIBILTY SCORE</h1>
+                        
+                        <a href="#resume-sec" class="btn btn-style-two btn-lg">RESULTS EXPLANATIONS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- SKILL SECTION END-->
+    <section id="resume-sec">
+        <div class="container">
+            <div class="row  move-me">
+                <div class="col-lg-4 col-md-4 col-sm-4 wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".2s">
+                    <h1>RESULTS</h1>
+                    <h1>EXPLANATIONS</h1>
+                    <div class="color-strip"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s">
+
+                    <div class="board">
+                        <div class="board-inner">
+                            <ul class="nav nav-tabs" id="myTab">
+                                <li class="active">
+                                    <a href="#home" data-toggle="tab" title="LANGUAGES DETAILS">
+                                        <span class="round-tabs one">
+                                            <img src="assets/img/java.png"/>
+                                        </span>
+                                    </a></li>
+
+                                <li><a href="#profile" data-toggle="tab" title="COMMITS DETAILS ">
+                                        <span class="round-tabs two">
+                                            <img src="assets/img/Octocat.png"/>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li><a href="#exp" data-toggle="tab" title="TEAM SIZE DETAILS">
+                                        <span class="round-tabs three">
+                                            <img src="assets/img/teamwork-logo-14411016.jpg"/>
+                                        </span></a>
+                                </li>
+
+                                <li><a href="#location" data-toggle="tab" title="CODING DETAILS">
+                                        <span class="round-tabs four">
+                                            <img src="assets/img/mrCode.png"/>
+                                        </span>
+                                    </a></li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <h4 class="head text-center">LANGUAGES DETAILS</h4>
+                           
+                                <p class="narrow text-center">
+                                    <h3 class="user1-class"></h3>
+                                    <span id="user1-language1"></span>
+                                    <span id="user1-language2"></span>
+                                    <span id="user1-language3"></span>
+
+                        
+                           
+                                    <h3 class="user2-class"></h3>
+                                    <span id="user2-language1"></span>
+                                    <span id="user2-language2"></span>
+                                    <span id="user2-language3"></span>
+                                    
+                                    </p>
+                            </div>
+                            <div class="tab-pane fade linesDisplay" id="profile">
+
+                                <h4 class="head text-center">COMMITS DETAILS </h4>
+                                <p class="narrow text-center">
+                                 
+                                        <h3 class="user1-class"></h3>
+                                        <span id="user1-commits1"></span>
+                                        <span id="user1-commits2"></span>
+                                        <span id="user1-commits3"></span>
+    
+                                        <h3 class="user2-class"></h3>
+                                        <span id="user2-commits1"></span>
+                                        <span id="user2-commits2"></span>
+                                        <span id="user2-commits3"></span>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade linesDisplay" id="exp">
+                                <h4 class="head text-center">COWORKERS DETAILS</h4>
+                                <p class="narrow text-center">
+                                    <h3 class="user1-class"></h3>
+                                        <span id="user1-coworkers1"></span>
+                                        <span id="user1-coworkers2"></span>
+                                        <span id="user1-coworkers3"></span>
+    
+                                        <h3 class="user2-class"></h3>
+                                        <span id="user2-coworkers1"></span>
+                                        <span id="user2-coworkers2"></span>
+                                        <span id="user2-coworkers3"></span>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade linesDisplay" id="location">
+                                <h4 class="head text-center">CODE DETAILS</h4>
+                                <p class="narrow text-center">
+                                    <h3 class="user1-class"></h3>
+                                        <span id="user1-lines1"></span>
+                                        <span id="user1-lines2"></span>
+                                        <span id="user1-lines3"></span>
+    
+                                        <h3 class="user2-class"></h3>
+                                        <span id="user2-lines1"></span>
+                                        <span id="user2-lines2"></span>
+                                        <span id="user2-lines3"></span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <div class="move-me">
+        <a href="#home-sec" class="scrollup"><i class="fa fa-chevron-up"></i></a>
+    </div>
+    <!-- SCROLL TO TOP SECTION END-->
+    <!--  JQUERY CORE SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!--  BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.js"></script>
+    <!--  SCROLL SCRIPTS -->
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <!--  WOW ANIMATION SCRIPTS -->
+    <script src="assets/js/wow.min.js"></script>
+    <!-- EASY PIE CHART SCRIPTS -->
+    <script src="assets/js/jquery.easypiechart.min.js"></script>
+    <!-- PRETTY PHOTO SCRIPTS -->
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <!--  STYLE SWITCHER SCRIPTS -->
+    <script src="assets/js/styleSwitcher.js"></script>
+    <!--  CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+</body>
+
+</html>
