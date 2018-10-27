@@ -2,7 +2,7 @@
 
 const baseUrl = window.location.hostname === 'localhost'
   ? 'http://localhost:3000'
-  : 'server url';
+  :  document.URL;
 
 async function getUser(username) {
   let v;
