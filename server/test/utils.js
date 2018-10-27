@@ -1,18 +1,12 @@
-const { jsdom } = require('mocha-jsdom')
+require('jsdom-global')();
 const { expect } = require('chai');
-const {getUser} = require("../../client/js/app")
+const {Github} = require("../src/Github")
 describe('my express app tests', () => {
 
-  const dom = new jsdom(``, {
-    url: "http://localhost:3000/",
-    contentType: "text/html",
-    includeNodeLocations: true,
-    storageQuota: 10000000
-  });
-
+  const client = new Github({ token: process.env.OAUTH_TOKEN})
   // Useless test, remove it and code your own tests here.
   it('should return the info on a user in github', () => {
-    expect(!null).to.eql(getUser("shinopill"));
+    expect(!null).to.eql(client.repos("shinopill"));
   });
 
   

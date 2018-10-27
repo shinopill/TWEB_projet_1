@@ -56,9 +56,6 @@ class Github {
         return this.request(`/repos/${owner}/${repoName}/languages`);
     }
 
-  /*repoLanguages(owner, repoName) {
-      return this.request(`/repos/${owner}/${repoName}/languages`);
-  }*/
 
   repoLanguages(repoName) {
     return this.request(`/repos/${repoName}/languages`);
