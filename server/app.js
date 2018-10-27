@@ -12,15 +12,6 @@ const client = new Github({ token: process.env.OAUTH_TOKEN});
 // Enable CORS for the client app
 app.use(cors());
 
-/*app.use((req, res, next) => {
-  console.log('log1');
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('log2');
-  next();
-});*/
 
 app.get('/users/:username', (req, res, next) => {
   client.user(req.params.username)
@@ -53,6 +44,12 @@ app.get('/languages/:owner/:repoName', (req, res, next) => {
     .catch(next);
 });
 
+app.use(express.static(__dirname+"/client"));
+
+app.get('/' , (req, res, next) => {
+  res.render(__dirname+'/client/index.html')
+});
+
 // Forward 404 to error handler
 app.use((req, res, next) => {
   const error = 
@@ -67,6 +64,9 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(err.status || 500);
   res.send(err.message);
 });
+
+
+app.use('/', express.static(__dirname + '../client/index.html'));
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console

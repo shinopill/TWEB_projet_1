@@ -65,7 +65,6 @@ function countRepos(user) {
 }
 
 function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 = {}) {
-  console.log(languagesStats1,languagesStats2)
   let array1 = [];
   let array2 = [];
   let result = 0;
@@ -78,18 +77,9 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
 
   i = 0;
   Object.keys(languagesStats2).forEach(key => {
-    console.log(languagesStats2[key])
     array2[i] = [key, languagesStats2[key]];
     i++;
   });
-  console.log("ARRAY1 BEFORE:");
-  for(c=0; c<array1.length; c++) {
-    console.log(array1[c]);
-  }
-  console.log("ARRAY2 BEFORE:");
-  for(c=0; c<array2.length; c++) {
-    console.log(array2[c]);
-  }
 
   array1.sort(function (a, b) {
     return b[1] - a[1];
@@ -98,18 +88,15 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
   array2.sort(function (a, b) {
     return b[1] - a[1];
   });
-
-  console.log(array1,array2)
-  let scores = [75, 15, 6, 3, 1];
-  for (i = 0; i < array1.length  && i < scores.length; i += 1) {
+ 
+  for (i = 0; i < array1.length; i += 1) {
     for(let j = 0 ; j < array2.length ; j +=1  ){
       if (!array1[i][0].localeCompare(array2[j][0])) {  
-        result = result + array1[i][1] * array2[j][1]/100
+        result = result + Math.min(array1[i][1], array2[j][1])
       }
     }
   }
   
-  console.log(result);
   return result;
 }
 
@@ -209,7 +196,6 @@ function updateProfile(user, i) {
   const avatar = document.getElementById(avatarIdString);
   const name = document.getElementById(nameIdString);
   const title = document.getElementById(userTitleIdString);
-  console.log(nameSpan)
   
   for(let nbElements = 0 ; nbElements < nameSpan.length; nbElements += 1 ){
     nameSpan[nbElements].innerHTML = user.login;
@@ -263,12 +249,26 @@ function updateCompatibilityScore(score1,score2,score3,score4){
   const score = score1*0.6 + score2*0.15 + score3*0.15 + score4*0.1  
   compatibility.innerHTML =  score;
   let nbHeart = Math.floor(score/20);
-  console.log( nbHeart)
   for(let i = 0 ; i < nbHeart ; i += 1){
     console.log(heart[i].classList)
     heart[i].classList.remove("far")
     heart[i].classList.add("fas")
   }
+
+  if(score === 100){
+    title.innerHTML = "Perfect Match"
+  } else if(score > 80){
+    title.innerHTML = "Great"
+  }else if(score > 60){
+    title.innerHTML = "Ok"
+  }else if(score > 50){
+    title.innerHTML = "Should be fine"
+  }else if(score > 30){
+    title.innerHTML = "Probably won't work "
+  }else{
+    title.innerHTML = "Avoid "
+  }
+
   
 }
 function updateLines(tablesLines,j){
@@ -370,8 +370,6 @@ async function findNumberOfCommits(user, userRepo) {
 
     //For each repos we search for the commits
     const commits = await getCommits(user, userRepo[i].name)
-
-      console.log(commits)
       let totalCommit = 0;
       let ownCommit = 0;
       let numberOfcommiter = commits.length
@@ -389,18 +387,8 @@ async function findNumberOfCommits(user, userRepo) {
 
     data.push(infoRepo)
   }
-console.log(`retour de la fonction avec ${user}`)
  return data
 }
-
-
-/*function handleSearch(username) {
-    return Promise.all([
-        getUser(username),
-    ]).then(([user]) => {
-        updateProfile(user);
-    })
-}*/
 
 var url = new URL(document.URL);
 var user1 = url.searchParams.get('user1');
@@ -415,7 +403,6 @@ function handleSearch(username, username2, i,j) {
  
   return  Promise.all([ getRepos(username),getRepos(username2) , getUser(username, i), getUser(username2,j) ,getLanguages(username),getLanguages(username2)]).then(([repos,repos2, user,user2, languages,languages2]) => {
     return Promise.all([findNumberOfCommits(username,repos), findNumberOfCommits(username2,repos2)]).then(([data1,data2])=>{
-      console.log(languages,languages2)
       dataCommits.push(data1)
       dataCommits.push(data2)
 
