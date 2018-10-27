@@ -1,8 +1,8 @@
 //const fetch = require('node-fetch');
-const url = require('./resultUrl')
+const endUrl = require('./resultUrl')
 
 function getBaseUrl(modifiedUrl){
-  return modifiedUrl.replace(url,"")
+  return modifiedUrl.replace(endUrl,"")
 }
 
 const baseUrl = window.location.hostname === 'localhost'
