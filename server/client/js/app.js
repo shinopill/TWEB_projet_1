@@ -131,14 +131,12 @@ function giveTitle(user) {
   return title;
 }
 
-
-
-function getRatioLines(tablesLines, userId){
-  if(tablesLines[1][userId] > 0 ){
-    return tablesLines[0][userId]/tablesLines[1][userId];
+function getRatioLines(tablesLines, userId) {
+  if (tablesLines[1][userId] > 0) {
+    return tablesLines[0][userId] / tablesLines[1][userId];
   }
 
-  return tablesLines[0][userId]
+  return tablesLines[0][userId];
 }
 
 function commitParticipation(commits, userId) {
@@ -248,12 +246,13 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   const heart = document.getElementsByClassName('fa-heart');
   const compatibility = document.getElementById('compatibilityScore');
   const title = document.getElementById('compatibilityTitle');
-  const score = score1*0.6 + score2*0.15 + score3*0.15 + score4*0.1  
-  compatibility.innerHTML =  score.toFixed(2) + "%";
-  let nbHeart = Math.floor(score/20);
-  for(let i = 0 ; i < nbHeart ; i += 1){
-    heart[i].classList.remove("far")
-    heart[i].classList.add("fas")
+  const score = score1 * 0.6 + score2 * 0.15 + score3 * 0.15 + score4 * 0.1;
+  compatibility.innerHTML = `${score.toFixed(2)}%`;
+  const nbHeart = Math.floor(score / 20);
+
+  for (let i = 0; i < nbHeart; i += 1) {
+    heart[i].classList.remove('far');
+    heart[i].classList.add('fas');
   }
 
   if (score === 100) {
@@ -265,14 +264,11 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   } else if (score > 50) {
     title.innerHTML = 'Should be fine';
   } else if (score > 30) {
-    title.innerHTML = 'Probably won\'t work ';
+    title.innerHTML = 'Probably won\'t work';
   } else {
-    title.innerHTML = 'Avoid ';
+    title.innerHTML = 'Avoid';
   }
-
-  
 }
-
 
 function updateLines(tablesLines, j) {
   const lines1 = document.getElementById(`user${j}-lines1`);
@@ -370,8 +366,8 @@ async function findNumberOfCommits(user, userRepo) {
     infoRepo.repoName = userRepo[i].name;
 
     // For each repos we search for the commits
-    const commits = await getCommits(user, userRepo[i].name);
-    if(commits != null) {
+    const commits = await getCommits(user, userRepo[i].name);// eslint-disable-line no-await-in-loop
+    if (commits != null) {
       let totalCommit = 0;
       let ownCommit = 0;
       const numberOfcommiter = commits.length;
