@@ -13,6 +13,4 @@ function resultUrl() {
   document.getElementById('calculateButton').href = url;
 }
 
-module.exports{
-  url
-}
+module.exports = url
