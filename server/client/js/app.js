@@ -252,7 +252,7 @@ function updateCompatibilityScore(score1,score2,score3,score4){
   const compatibility = document.getElementById('compatibilityScore')
   const title = document.getElementById('compatibilityTitle');
   const score = score1*0.6 + score2*0.15 + score3*0.15 + score4*0.1  
-  compatibility.innerHTML =  score;
+  compatibility.innerHTML =  score.toFixed(2) + "%";
   let nbHeart = Math.floor(score/20);
   for(let i = 0 ; i < nbHeart ; i += 1){
     heart[i].classList.remove("far")
@@ -282,7 +282,7 @@ function updateLines(tablesLines,j){
 
   lines1.innerHTML = "<i> Number of lines added : </i>" + tablesLines[0][j-1]  ;
   lines2.innerHTML = "<i> Number of lines deleted : </i>" + tablesLines[1][j-1] ;
-  lines3.innerHTML = "<i> Ratio Lines added/deleted : </i>" +  tablesLines[0][j-1]/tablesLines[1][j-1];
+  lines3.innerHTML = "<i> Ratio Lines added/deleted : </i>" +  (tablesLines[0][j-1]/tablesLines[1][j-1]).toFixed(2);
 }
 function updateTeamSize(infoToSend, dataCommits, j ){
   const coworkers = document.getElementById('user' + j + '-coworkers1');
