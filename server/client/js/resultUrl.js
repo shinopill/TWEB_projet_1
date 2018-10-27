@@ -1,5 +1,3 @@
-
-
 function resultUrl() {
   let url  = "result.html?user1=";
 
@@ -12,4 +10,3 @@ function resultUrl() {
 
   document.getElementById('calculateButton').href = url;
 }
-
