@@ -215,14 +215,16 @@ function scoreLinesAddedAndDeleted(commits) {
     let deleted = 0;
     let i;
 
+    const countLines = function countLines(data) {
+      if (data.a < 10000) {
+        added += data.a;
+        deleted += data.d;
+      }
+    };
+
     for (i = 0; i < commits[nbUser].length; i += 1) {
       if (commits[nbUser][i].ownCommit !== 0) {
-        commits[nbUser][i].ownCommit.weeks.forEach(data => {
-          if (data.a < 10000) {
-            added += data.a;
-            deleted += data.d;
-          }
-        });
+        commits[nbUser][i].ownCommit.weeks.forEach(countLines);
       }
     }
     linesAdded.push(added);
@@ -243,12 +245,13 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   const heart = document.getElementsByClassName('fa-heart');
   const compatibility = document.getElementById('compatibilityScore');
   const title = document.getElementById('compatibilityTitle');
-  const score = score1*0.6 + score2*0.15 + score3*0.15 + score4*0.1  
-  compatibility.innerHTML =  score.toFixed(2) + "%";
-  let nbHeart = Math.floor(score/20);
-  for(let i = 0 ; i < nbHeart ; i += 1){
-    heart[i].classList.remove("far")
-    heart[i].classList.add("fas")
+  const score = score1 * 0.6 + score2 * 0.15 + score3 * 0.15 + score4 * 0.1;
+  compatibility.innerHTML = `${score.toFixed(2)}%`;
+  const nbHeart = Math.floor(score / 20);
+
+  for (let i = 0; i < nbHeart; i += 1) {
+    heart[i].classList.remove('far');
+    heart[i].classList.add('fas');
   }
 
   if (score === 100) {
@@ -264,10 +267,7 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   } else {
     title.innerHTML = 'Avoid';
   }
-
-  
 }
-
 
 function updateLines(tablesLines, j) {
   const lines1 = document.getElementById(`user${j}-lines1`);
@@ -278,6 +278,7 @@ function updateLines(tablesLines, j) {
   lines2.innerHTML = `<i> Number of lines deleted : </i>${tablesLines[1][j - 1]}`;
   lines3.innerHTML = `<i> Ratio Lines added/deleted : </i>${tablesLines[0][j - 1] / tablesLines[1][j - 1]}`;
 }
+
 function updateTeamSize(infoToSend, dataCommits, j) {
   const coworkers = document.getElementById(`user${j}-coworkers1`);
   const coworkers2 = document.getElementById(`user${j}-coworkers2`);
@@ -286,8 +287,8 @@ function updateTeamSize(infoToSend, dataCommits, j) {
   coworkers.innerHTML = `<i> Number of repos : </i>${dataCommits[j - 1].length}`;
   coworkers2.innerHTML = `<i> Number coworkers across the repos : </i>${infoToSend.totalCommiter}`;
   coworkers3.innerHTML = `<i> Average number of coworkers  : </i>${infoToSend.totalCommiter / dataCommits[j - 1].length}`;
-
 }
+
 function updateCommitParticipation(infoToSend, j) {
   const commits1 = document.getElementById(`user${j}-commits1`);
   const commits2 = document.getElementById(`user${j}-commits2`);
@@ -364,8 +365,8 @@ async function findNumberOfCommits(user, userRepo) {
     infoRepo.repoName = userRepo[i].name;
 
     // For each repos we search for the commits
-    const commits = await getCommits(user, userRepo[i].name);
-    if(commits != null) {
+    const commits = await getCommits(user, userRepo[i].name);// eslint-disable-line no-await-in-loop
+    if (commits != null) {
       let totalCommit = 0;
       let ownCommit = 0;
       const numberOfcommiter = commits.length;
@@ -414,8 +415,12 @@ function handleSearch(username, username2, i, j) {
         const dataLabelMap = {};
         const dataLabelMap2 = {};
 
-        languagesLabels1.forEach((key, k) => dataLabelMap[key] = dataLang1[k]);
-        languagesLabels2.forEach((key, l) => dataLabelMap2[key] = dataLang2[l]);
+        languagesLabels1.forEach((key, k) => {
+          (dataLabelMap[key] = dataLang1[k]);
+        });
+        languagesLabels2.forEach((key, l) => {
+          (dataLabelMap2[key] = dataLang2[l]);
+        });
         languagesMap.push(dataLabelMap);
         languagesMap.push(dataLabelMap2);
 
