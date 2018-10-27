@@ -5,7 +5,7 @@ function getBaseUrl(modifiedUrl){
 
 const baseUrl = window.location.hostname === 'localhost'
   ? 'http://localhost:3000'
-  :  window.location.origin
+  :  window.location.protocol+"//"+window.location.hostname
 
 async function getUser(username) {
   let v;
