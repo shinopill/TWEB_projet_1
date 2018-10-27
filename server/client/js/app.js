@@ -1,6 +1,6 @@
 const baseUrl = window.location.hostname === 'localhost'
   ? 'http://localhost:3000'
-  : window.location.protocol + "//" + window.location.hostname;
+  : `${window.location.protocol}//${window.location.hostname}`;
 
 async function getUser(username) {
   let v;
@@ -62,7 +62,7 @@ function countRepos(user) {
 
 function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 = {}) {
   const array1 = [];
-  let array2 = [];
+  const array2 = [];
   let result = 0;
 
   let i = 0;
@@ -77,11 +77,11 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
     i += 1;
   });
 
-  array1.sort(function (a, b) {
+  array1.sort((a, b) => {
     return b[1] - a[1];
   });
 
-  array2.sort(function (a, b) {
+  array2.sort((a, b) => {
     return b[1] - a[1];
   });
 
@@ -129,7 +129,7 @@ function getRatioLines(tablesLines, userId){
 }
 
 function commitParticipation(commits, userId) {
-  let infoToSend = {};
+  const infoToSend = {};
   let totalCommiter = 0;
   let totalCommits = 0;
   let ownCommits = 0;
@@ -196,14 +196,15 @@ function updateProfile(user, i) {
 
 
 function scoreLinesAddedAndDeleted(commits) {
-  let tables = [];
-  let linesAdded = [];
-  let linesDeleted = [];
+  const tables = [];
+  const linesAdded = [];
+  const linesDeleted = [];
 
   for (let nbUser = 0; nbUser < 2; nbUser += 1) {
     let added = 0;
     let deleted = 0;
     let i;
+
     for (i = 0; i < commits[nbUser].length; i += 1) {
       if (commits[nbUser][i].ownCommit !== 0) {
         commits[nbUser][i].ownCommit.weeks.forEach(data => {
@@ -289,7 +290,7 @@ function updateCommitParticipation(infoToSend, j) {
 
 function updateLanguagesDetails(languagesStats = {}, j) {
   /* Sort languages */
-  let array1 = [];
+  const array1 = [];
 
   let i = 0;
   Object.keys(languagesStats).forEach(key => {
@@ -297,7 +298,7 @@ function updateLanguagesDetails(languagesStats = {}, j) {
     i += 1;
   });
 
-  array1.sort(function (a, b) {
+  array1.sort((a, b) => {
     return b[1] - a[1];
   });
 
@@ -344,16 +345,16 @@ function updateChart(labels, data) {
 }
 
 async function findNumberOfCommits(user, userRepo) {
-  let data = [];
+  const data = [];
 
   let i;
   // We get through all the repos found
   for (i = 0; i < userRepo.length; i += 1) {
-    let infoRepo = {};
+    const infoRepo = {};
     infoRepo.repoName = userRepo[i].name;
 
     // For each repos we search for the commits
-    const commits = await getCommits(user, userRepo[i].name)
+    const commits = await getCommits(user, userRepo[i].name);
     let totalCommit = 0;
     let ownCommit = 0;
     const numberOfcommiter = commits.length;
@@ -378,39 +379,40 @@ const user1 = url.searchParams.get('user1');
 const user2 = url.searchParams.get('user2');
 
 
-let dataCommits = [];
-let dataLabels = [];
-let languagesMap = [];
+const dataCommits = [];
+const dataLabels = [];
+const languagesMap = [];
 
 function handleSearch(username, username2, i, j) {
   return Promise.all([getRepos(username), getRepos(username2), getUser(username, i),
-  getUser(username2, j), getLanguages(username),
-  getLanguages(username2)]).then(([repos, repos2, user, user2, languages, languages2]) => {
-    return Promise.all([findNumberOfCommits(username, repos),
-    findNumberOfCommits(username2, repos2)]).then(([data1, data2]) => {
-      dataCommits.push(data1);
-      dataCommits.push(data2);
+    getUser(username2, j), getLanguages(username),
+    getLanguages(username2)])
+    .then(([repos, repos2, userInfo1, userInfo2, languages, languages2]) => {
+      return Promise.all([findNumberOfCommits(username, repos),
+        findNumberOfCommits(username2, repos2)]).then(([data1, data2]) => {
+        dataCommits.push(data1);
+        dataCommits.push(data2);
 
-      const languagesLabels1 = Object.keys(languages);
-      const dataLang1 = languagesLabels1.map(label => languages[label]);
-      const languagesLabels2 = Object.keys(languages2);
-      const dataLang2 = languagesLabels2.map(label => languages2[label]);
-      dataLabels.push(languagesLabels1);
-      dataLabels.push(languagesLabels2);
-      let dataLabelMap = {};
-      let dataLabelMap2 = {};
+        const languagesLabels1 = Object.keys(languages);
+        const dataLang1 = languagesLabels1.map(label => languages[label]);
+        const languagesLabels2 = Object.keys(languages2);
+        const dataLang2 = languagesLabels2.map(label => languages2[label]);
+        dataLabels.push(languagesLabels1);
+        dataLabels.push(languagesLabels2);
+        const dataLabelMap = {};
+        const dataLabelMap2 = {};
 
-      languagesLabels1.forEach((key, k) => dataLabelMap[key] = dataLang1[k]);
-      languagesLabels2.forEach((key, l) => dataLabelMap2[key] = dataLang2[l]);
-      languagesMap.push(dataLabelMap);
-      languagesMap.push(dataLabelMap2);
+        languagesLabels1.forEach((key, k) => dataLabelMap[key] = dataLang1[k]);
+        languagesLabels2.forEach((key, l) => dataLabelMap2[key] = dataLang2[l]);
+        languagesMap.push(dataLabelMap);
+        languagesMap.push(dataLabelMap2);
 
-      updateProfile(user, 1);
-      updateProfile(user2, 2);
+        updateProfile(userInfo1, 1);
+        updateProfile(userInfo2, 2);
 
-      return 'Done';
+        return 'Done';
+      });
     });
-  });
 }
 
 async function main() {
@@ -446,10 +448,3 @@ async function main() {
 }
 
 main();
-/*
-module.exports = {
-  scoreLinesAddedAndDeleted,
-  countRepos,
-  getUser
-}
-*/

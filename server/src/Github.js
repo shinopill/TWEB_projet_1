@@ -44,18 +44,13 @@ class Github {
     return this.request(`/users/${username}`);
   }
 
-    repos(username) {
-        return this.request(`/users/${username}/repos`);
-    }
-    
-    commit(owner,repo) {
-        return this.request(`/repos/${owner}/${repo}/stats/contributors`)
-    }
-   
-    repoLanguages(owner, repoName) {
-        return this.request(`/repos/${owner}/${repoName}/languages`);
-    }
+  repos(username) {
+    return this.request(`/users/${username}/repos`);
+  }
 
+  commit(owner, repo) {
+    return this.request(`/repos/${owner}/${repo}/stats/contributors`);
+  }
 
   repoLanguages(repoName) {
     return this.request(`/repos/${repoName}/languages`);
