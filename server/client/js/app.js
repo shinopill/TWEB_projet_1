@@ -9,7 +9,7 @@ async function getUser(username) {
   try {
       v = await fetch(`${baseUrl}/users/${username}`)
   } catch (error) {
-    
+    throw new Error('Error, can\'t fetch users info.');
   }
    let data = v.json()
     return data;
@@ -20,7 +20,7 @@ async function getRepos(username) {
   try {
     v = await fetch(`${baseUrl}/users/${username}/repos`)
   } catch (error) {
-    
+    throw new Error('Error, can\'t fetch users repos.');
   }
     let data = v.json()
     return data;
@@ -89,11 +89,7 @@ function calculateLanguagesCompatibility(languagesStats1 = {}, languagesStats2 =
   array2.sort(function (a, b) {
     return b[1] - a[1];
   });
-<<<<<<< HEAD:server/client/js/app.js
  
-=======
-
->>>>>>> d1ae9daedf8ab9530042c91c9759940c623bac52:client/js/app.js
   for (i = 0; i < array1.length; i += 1) {
     for(let j = 0 ; j < array2.length ; j +=1  ){
       if (!array1[i][0].localeCompare(array2[j][0])) {  
@@ -270,10 +266,6 @@ function updateCompatibilityScore(score1,score2,score3,score4){
     title.innerHTML = "Avoid "
   }
 
-<<<<<<< HEAD:server/client/js/app.js
-=======
-
->>>>>>> d1ae9daedf8ab9530042c91c9759940c623bac52:client/js/app.js
   
 }
 function updateLines(tablesLines,j){
@@ -388,17 +380,9 @@ async function findNumberOfCommits(user, userRepo) {
       infoRepo.ownCommit = ownCommit;
     data.push(infoRepo)
   }
-<<<<<<< HEAD:server/client/js/app.js
  return data
 }
 
-=======
-
- return data
-}
-
-
->>>>>>> d1ae9daedf8ab9530042c91c9759940c623bac52:client/js/app.js
 var url = new URL(document.URL);
 var user1 = url.searchParams.get('user1');
 var user2 = url.searchParams.get('user2');
@@ -412,10 +396,6 @@ function handleSearch(username, username2, i,j) {
  
   return  Promise.all([ getRepos(username),getRepos(username2) , getUser(username, i), getUser(username2,j) ,getLanguages(username),getLanguages(username2)]).then(([repos,repos2, user,user2, languages,languages2]) => {
     return Promise.all([findNumberOfCommits(username,repos), findNumberOfCommits(username2,repos2)]).then(([data1,data2])=>{
-<<<<<<< HEAD:server/client/js/app.js
-=======
-  
->>>>>>> d1ae9daedf8ab9530042c91c9759940c623bac52:client/js/app.js
       dataCommits.push(data1)
       dataCommits.push(data2)
 
@@ -476,8 +456,9 @@ async function main(){
 
 main()
 
+/*
 module.exports = {
   scoreLinesAddedAndDeleted,
   countRepos,
   getUser
-}
+}*/
