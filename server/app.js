@@ -4,11 +4,11 @@ const express = require('express');
 const cors = require('cors');
 const Github = require('./src/Github');
 const utils = require('./src/utils');
-const url = require('./client/js/resultUrl')
+const url = require('./client/js/resultUrl');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const client = new Github({ token: process.env.OAUTH_TOKEN});
+const client = new Github({ token: process.env.OAUTH_TOKEN });
 
 // Enable CORS for the client app
 app.use(cors());
@@ -33,7 +33,7 @@ app.get('/languages/:username', (req, res, next) => {
 });
 
 app.get('/users/:username/:repo/commits', (req, res, next) => {
-  client.commit(req.params.username,req.params.repo)
+  client.commit(req.params.username, req.params.repo)
     .then(commits => res.send(commits))
     .catch(next);
 });
@@ -44,16 +44,16 @@ app.get('/languages/:owner/:repoName', (req, res, next) => {
     .catch(next);
 });
 
-app.use(express.static(__dirname+"/client"));
+app.use(express.static(`${__dirname}/client`));
 
-app.get('/' , (req, res, next) => {
-  res.render(__dirname+'/client/index.html')
+app.get('/', (req, res, next) => {
+  res.render(`${__dirname}/client/index.html`)
+    .catch(next);
 });
 
 // Forward 404 to error handler
 app.use((req, res, next) => {
-  const error = 
-  new Error('Not found');
+  const error = new Error('Not found');
   error.status = 404;
   next(error);
 });
@@ -65,8 +65,7 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.send(err.message);
 });
 
-
-app.use('/', express.static(__dirname + '../client/index.html'));
+app.use('/', express.static(`${__dirname}../client/index.html`));
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
