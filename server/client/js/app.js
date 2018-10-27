@@ -275,6 +275,7 @@ function updateCompatibilityScore(score1,score2,score3,score4){
 
   
 }
+
 function updateLines(tablesLines,j){
   const lines1 = document.getElementById('user' + j + '-lines1');
   const lines2 = document.getElementById('user' + j + '-lines2');
@@ -468,4 +469,5 @@ module.exports = {
   scoreLinesAddedAndDeleted,
   countRepos,
   getUser
-}*/
+}
+*/
