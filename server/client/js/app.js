@@ -9,8 +9,11 @@ async function getUser(username) {
   } catch (error) {
     throw new Error('Error, can\'t fetch users info.');
   }
-  const data = v.json();
-  return data;
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 async function getRepos(username) {
@@ -20,8 +23,11 @@ async function getRepos(username) {
   } catch (error) {
     throw new Error('Error, can\'t fetch users repos.');
   }
-  const data = v.json();
-  return data;
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 async function getLanguages(username) {
@@ -31,8 +37,11 @@ async function getLanguages(username) {
   } catch (e) {
     throw new Error('Error, can\'t fetch users languages.');
   }
-  const data = await v.json();
-  return data;
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 async function getCommits(username, repoName) {
@@ -42,8 +51,12 @@ async function getCommits(username, repoName) {
   } catch (e) {
     window.location = 'http://localhost:8080';
   }
-  const data = await v.json();
-  return data;
+
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 function countRepos(user) {
@@ -118,8 +131,14 @@ function giveTitle(user) {
   return title;
 }
 
-function getRatioLines(tablesLines, userId) {
-  return tablesLines[0][userId] / tablesLines[1][userId];
+
+
+function getRatioLines(tablesLines, userId){
+  if(tablesLines[1][userId] > 0 ){
+    return tablesLines[0][userId]/tablesLines[1][userId];
+  }
+
+  return tablesLines[0][userId]
 }
 
 function commitParticipation(commits, userId) {
@@ -229,12 +248,12 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   const heart = document.getElementsByClassName('fa-heart');
   const compatibility = document.getElementById('compatibilityScore');
   const title = document.getElementById('compatibilityTitle');
-  const score = score1 * 0.6 + score2 * 0.15 + score3 * 0.15 + score4 * 0.1;
-  compatibility.innerHTML = score;
-  const nbHeart = Math.floor(score / 20);
-  for (let i = 0; i < nbHeart; i += 1) {
-    heart[i].classList.remove('far');
-    heart[i].classList.add('fas');
+  const score = score1*0.6 + score2*0.15 + score3*0.15 + score4*0.1  
+  compatibility.innerHTML =  score.toFixed(2) + "%";
+  let nbHeart = Math.floor(score/20);
+  for(let i = 0 ; i < nbHeart ; i += 1){
+    heart[i].classList.remove("far")
+    heart[i].classList.add("fas")
   }
 
   if (score === 100) {
@@ -250,7 +269,10 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   } else {
     title.innerHTML = 'Avoid ';
   }
+
+  
 }
+
 
 function updateLines(tablesLines, j) {
   const lines1 = document.getElementById(`user${j}-lines1`);
@@ -349,21 +371,23 @@ async function findNumberOfCommits(user, userRepo) {
 
     // For each repos we search for the commits
     const commits = await getCommits(user, userRepo[i].name);
-    let totalCommit = 0;
-    let ownCommit = 0;
-    const numberOfcommiter = commits.length;
-    infoRepo.numberOfcommiter = numberOfcommiter;
-    // for each commits, we check the author and then we compare with the user
-    for (let j = 0; j < numberOfcommiter; j += 1) {
-      totalCommit += commits[j].total;
-      if (commits[j].author != null
-        && !commits[j].author.login.toLowerCase().localeCompare(user.toLowerCase())) {
-        ownCommit = commits[j];
+    if(commits != null) {
+      let totalCommit = 0;
+      let ownCommit = 0;
+      const numberOfcommiter = commits.length;
+      infoRepo.numberOfcommiter = numberOfcommiter;
+      // for each commits, we check the author and then we compare with the user
+      for (let j = 0; j < numberOfcommiter; j += 1) {
+        totalCommit += commits[j].total;
+        if (commits[j].author != null
+         && !commits[j].author.login.toLowerCase().localeCompare(user.toLowerCase())) {
+          ownCommit = commits[j];
+        }
       }
+      infoRepo.totalCommit = totalCommit;
+      infoRepo.ownCommit = ownCommit;
+      data.push(infoRepo);
     }
-    infoRepo.totalCommit = totalCommit;
-    infoRepo.ownCommit = ownCommit;
-    data.push(infoRepo);
   }
   return data;
 }
