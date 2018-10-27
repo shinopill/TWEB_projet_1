@@ -134,7 +134,11 @@ function giveTitle(user) {
 
 
 function getRatioLines(tablesLines, userId){
-  return tablesLines[0][userId]/tablesLines[1][userId];
+  if(tablesLines[1][userId] > 0 ){
+    return tablesLines[0][userId]/tablesLines[1][userId];
+  }
+
+  return tablesLines[0][userId]
 }
 
 function commitParticipation(commits,userId){
