@@ -131,14 +131,11 @@ function giveTitle(user) {
   return title;
 }
 
-
-
-function getRatioLines(tablesLines, userId){
-  if(tablesLines[1][userId] > 0 ){
-    return tablesLines[0][userId]/tablesLines[1][userId];
+function getRatioLines(tablesLines, userId) {
+  if (tablesLines[1][userId] > 0) {
+    return tablesLines[0][userId] / tablesLines[1][userId];
   }
-
-  return tablesLines[0][userId]
+  return tablesLines[0][userId];
 }
 
 function commitParticipation(commits, userId) {
@@ -263,9 +260,9 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   } else if (score > 50) {
     title.innerHTML = 'Should be fine';
   } else if (score > 30) {
-    title.innerHTML = 'Probably won\'t work ';
+    title.innerHTML = 'Probably won\'t work';
   } else {
-    title.innerHTML = 'Avoid ';
+    title.innerHTML = 'Avoid';
   }
 
   

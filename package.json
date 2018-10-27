@@ -6,16 +6,18 @@
   "scripts": {
     "start": "node server/app.js",
     "dev": "nodemon --watch server/app.js --watch src",
-    "test": "mocha"
+    "test": "mocha ./server/test/test.js"
   },
   "author": "shinopill",
   "license": "ISC",
   "devDependencies": {
-    "live-server": "^1.2.0",
     "chai": "^4.2.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "jsdom": "12.2.0",
+    "jsdom-global": "3.0.2",
+    "live-server": "^1.2.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4"
   },
