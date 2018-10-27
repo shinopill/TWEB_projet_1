@@ -1,8 +1,13 @@
 //const fetch = require('node-fetch');
+const url = require('./resultUrl')
+
+function getBaseUrl(modifiedUrl){
+  return modifiedUrl.replace(url,"")
+}
 
 const baseUrl = window.location.hostname === 'localhost'
   ? 'http://localhost:3000'
-  :  document.URL;
+  :  getBaseUrl(document.URL);
 
 async function getUser(username) {
   let v;

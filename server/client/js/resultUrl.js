@@ -1,5 +1,7 @@
+let url  = "result.html?user1=";
+
 function resultUrl() {
-  let url = "result.html?user1=";
+  
 
   const user1 = document.getElementById('user1').value;
   const user2 = document.getElementById('user2').value;
@@ -9,4 +11,8 @@ function resultUrl() {
   url += user2;
 
   document.getElementById('calculateButton').href = url;
+}
+
+module.exports{
+  url
 }
