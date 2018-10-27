@@ -199,14 +199,16 @@ function scoreLinesAddedAndDeleted(commits) {
     let deleted = 0;
     let i;
 
+    const countLines = function countLines(data) {
+      if (data.a < 10000) {
+        added += data.a;
+        deleted += data.d;
+      }
+    };
+
     for (i = 0; i < commits[nbUser].length; i += 1) {
       if (commits[nbUser][i].ownCommit !== 0) {
-        commits[nbUser][i].ownCommit.weeks.forEach(data => {
-          if (data.a < 10000) {
-            added += data.a;
-            deleted += data.d;
-          }
-        });
+        commits[nbUser][i].ownCommit.weeks.forEach(countLines);
       }
     }
     linesAdded.push(added);
@@ -259,6 +261,7 @@ function updateLines(tablesLines, j) {
   lines2.innerHTML = `<i> Number of lines deleted : </i>${tablesLines[1][j - 1]}`;
   lines3.innerHTML = `<i> Ratio Lines added/deleted : </i>${tablesLines[0][j - 1] / tablesLines[1][j - 1]}`;
 }
+
 function updateTeamSize(infoToSend, dataCommits, j) {
   const coworkers = document.getElementById(`user${j}-coworkers1`);
   const coworkers2 = document.getElementById(`user${j}-coworkers2`);
@@ -267,8 +270,8 @@ function updateTeamSize(infoToSend, dataCommits, j) {
   coworkers.innerHTML = `<i> Number of repos : </i>${dataCommits[j - 1].length}`;
   coworkers2.innerHTML = `<i> Number coworkers across the repos : </i>${infoToSend.totalCommiter}`;
   coworkers3.innerHTML = `<i> Average number of coworkers  : </i>${infoToSend.totalCommiter / dataCommits[j - 1].length}`;
-
 }
+
 function updateCommitParticipation(infoToSend, j) {
   const commits1 = document.getElementById(`user${j}-commits1`);
   const commits2 = document.getElementById(`user${j}-commits2`);
@@ -393,8 +396,12 @@ function handleSearch(username, username2, i, j) {
         const dataLabelMap = {};
         const dataLabelMap2 = {};
 
-        languagesLabels1.forEach((key, k) => dataLabelMap[key] = dataLang1[k]);
-        languagesLabels2.forEach((key, l) => dataLabelMap2[key] = dataLang2[l]);
+        languagesLabels1.forEach((key, k) => {
+          (dataLabelMap[key] = dataLang1[k]);
+        });
+        languagesLabels2.forEach((key, l) => {
+          (dataLabelMap2[key] = dataLang2[l]);
+        });
         languagesMap.push(dataLabelMap);
         languagesMap.push(dataLabelMap2);
 
