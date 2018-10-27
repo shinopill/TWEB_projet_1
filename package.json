@@ -2,10 +2,10 @@
   "name": "github-analytics",
   "version": "1.0.0",
   "description": "Github analytics",
-  "main": "app.js",
+  "main": "index.html",
   "scripts": {
     "start": "node ./server/app.js",
-    "dev": "nodemon --watch app.js --watch src",
+    "dev": "nodemon --watch ./server/app.js --watch src",
     "test": "mocha"
   },
   "author": "mathieujee",
