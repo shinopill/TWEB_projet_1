@@ -9,8 +9,11 @@ async function getUser(username) {
   } catch (error) {
     throw new Error('Error, can\'t fetch users info.');
   }
-  const data = v.json();
-  return data;
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 async function getRepos(username) {
@@ -20,8 +23,11 @@ async function getRepos(username) {
   } catch (error) {
     throw new Error('Error, can\'t fetch users repos.');
   }
-  const data = v.json();
-  return data;
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 async function getLanguages(username) {
@@ -31,8 +37,11 @@ async function getLanguages(username) {
   } catch (e) {
     throw new Error('Error, can\'t fetch users languages.');
   }
-  const data = await v.json();
-  return data;
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 async function getCommits(username, repoName) {
@@ -42,8 +51,12 @@ async function getCommits(username, repoName) {
   } catch (e) {
     window.location = 'http://localhost:8080';
   }
-  const data = await v.json();
-  return data;
+
+  if (v.status === 200) {
+    const data = v.json();
+    return data;
+  }
+  return null;
 }
 
 function countRepos(user) {
@@ -355,21 +368,23 @@ async function findNumberOfCommits(user, userRepo) {
 
     // For each repos we search for the commits
     const commits = await getCommits(user, userRepo[i].name);
-    let totalCommit = 0;
-    let ownCommit = 0;
-    const numberOfcommiter = commits.length;
-    infoRepo.numberOfcommiter = numberOfcommiter;
-    // for each commits, we check the author and then we compare with the user
-    for (let j = 0; j < numberOfcommiter; j += 1) {
-      totalCommit += commits[j].total;
-      if (commits[j].author != null
-        && !commits[j].author.login.toLowerCase().localeCompare(user.toLowerCase())) {
-        ownCommit = commits[j];
+    if(commits != null) {
+      let totalCommit = 0;
+      let ownCommit = 0;
+      const numberOfcommiter = commits.length;
+      infoRepo.numberOfcommiter = numberOfcommiter;
+      // for each commits, we check the author and then we compare with the user
+      for (let j = 0; j < numberOfcommiter; j += 1) {
+        totalCommit += commits[j].total;
+        if (commits[j].author != null
+         && !commits[j].author.login.toLowerCase().localeCompare(user.toLowerCase())) {
+          ownCommit = commits[j];
+        }
       }
+      infoRepo.totalCommit = totalCommit;
+      infoRepo.ownCommit = ownCommit;
+      data.push(infoRepo);
     }
-    infoRepo.totalCommit = totalCommit;
-    infoRepo.ownCommit = ownCommit;
-    data.push(infoRepo);
   }
   return data;
 }
