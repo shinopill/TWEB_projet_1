@@ -368,7 +368,7 @@ function updateChart(labels, data) {
         },
       },
       responsive: false,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
     },
   };
 
