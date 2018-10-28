@@ -297,7 +297,7 @@ function updateLines(tablesLines, j) {
 
   lines1.innerHTML = `<i> Number of lines added : </i>${tablesLines[0][j - 1]}`;
   lines2.innerHTML = `<i> Number of lines deleted : </i>${tablesLines[1][j - 1]}`;
-  lines3.innerHTML = `<i> Ratio Lines added/deleted : </i>${tablesLines[0][j - 1] / tablesLines[1][j - 1]}`;
+  lines3.innerHTML = `<i> Ratio Lines added/deleted : </i>${(tablesLines[0][j - 1] / tablesLines[1][j - 1]).toFixed(2)}`;
 }
 
 function updateTeamSize(infoToSend, dataCommits, j) {
