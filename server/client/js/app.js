@@ -7,9 +7,11 @@ async function getUser(username) {
   try {
     v = await fetch(`${baseUrl}/users/${username}`);
   } catch (error) {
-    throw new Error('Error, can\'t fetch users info.');
+    window.location = baseUrl;
   }
-  if (v.status === 200) {
+  if (v.status === 404) {
+    window.location = baseUrl;
+  } else if (v.status === 200) {
     const data = v.json();
     return data;
   }
@@ -21,12 +23,15 @@ async function getRepos(username) {
   try {
     v = await fetch(`${baseUrl}/users/${username}/repos`);
   } catch (error) {
-    throw new Error('Error, can\'t fetch users repos.');
+    window.location = baseUrl;
   }
-  if (v.status === 200) {
+  if (v.status === 404) {
+    window.location = baseUrl;
+  } else if (v.status === 200) {
     const data = v.json();
     return data;
   }
+
   return null;
 }
 
@@ -35,9 +40,11 @@ async function getLanguages(username) {
   try {
     v = await fetch(`${baseUrl}/languages/${username}`);
   } catch (e) {
-    throw new Error('Error, can\'t fetch users languages.');
+    window.location = baseUrl;
   }
-  if (v.status === 200) {
+  if (v.status === 404) {
+    window.location = baseUrl;
+  } else if (v.status === 200) {
     const data = v.json();
     return data;
   }
@@ -49,10 +56,12 @@ async function getCommits(username, repoName) {
   try {
     v = await fetch(`${baseUrl}/users/${username}/${repoName}/commits`);
   } catch (e) {
-    window.location = 'http://localhost:8080';
+    window.location = baseUrl;
   }
 
-  if (v.status === 200) {
+  if (v.status === 404) {
+    window.location = baseUrl;
+  } else if (v.status === 200) {
     const data = v.json();
     return data;
   }

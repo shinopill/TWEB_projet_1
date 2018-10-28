@@ -50,6 +50,7 @@ app.get('/', (req, res, next) => {
     .catch(next);
 });
 
+
 // Forward 404 to error handler
 app.use((req, res, next) => {
   const error = new Error('Not found');
@@ -61,10 +62,9 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(err.status || 500);
-  res.send(err.message);
+  res.send(err);
 });
 
-app.use('/', express.static(`${__dirname}../client/index.html`));
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
