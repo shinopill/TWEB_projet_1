@@ -269,12 +269,9 @@ min-height: 450px;
 }
 .chartchart {
     float: right;
-    width: 600px;
-    height: 550px;
 }
 #chart-languages {
-    width: 600px;
-    height: 550px;
+    width: 200%;
 }
 .lowMarginBottom {
     margin-bottom: 0px;
