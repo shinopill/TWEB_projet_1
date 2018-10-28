@@ -123,19 +123,21 @@ function giveTitle(user) {
   let title;
 
   if (numberOfRepos < 5) {
-    title = 'Peasant';
+    title = 'Github Rookie';
   } else if (numberOfRepos < 10) {
-    title = 'Knight';
+    title = 'Github Apprentice';
   } else if (numberOfRepos < 20) {
-    title = 'Baron';
+    title = 'Github Regular';
   } else if (numberOfRepos < 30) {
-    title = 'Count';
+    title = 'Github Veteran';
   } else if (numberOfRepos < 40) {
-    title = 'Duke';
+    title = 'Github Prince';
   } else if (numberOfRepos < 50) {
-    title = 'Price';
+    title = 'Github King';
+  } else if (numberOfRepos < 100) {
+    title = 'Github Lord';
   } else {
-    title = 'King';
+    title = 'Github God';
   }
   return title;
 }
@@ -264,17 +266,27 @@ function updateCompatibilityScore(score1, score2, score3, score4) {
   }
 
   if (score === 100) {
-    title.innerHTML = 'Perfect Match';
+    title.innerHTML = 'Github Soulmate found';
+  } else if (score > 90) {
+    title.innerHTML = 'Almost perfect match';
   } else if (score > 80) {
-    title.innerHTML = 'Great';
+    title.innerHTML = 'Great match';
+  } else if (score > 70) {
+    title.innerHTML = 'Nice';
   } else if (score > 60) {
     title.innerHTML = 'Ok';
   } else if (score > 50) {
-    title.innerHTML = 'Should be fine';
-  } else if (score > 30) {
+    title.innerHTML = 'Could be fine';
+  } else if (score > 40) {
     title.innerHTML = 'Probably won\'t work';
+  } else if (score > 30) {
+    title.innerHTML = 'Meh...';
+  } else if (score > 20) {
+    title.innerHTML = 'U sure \'bout dis ?';
+  } else if (score > 10) {
+    title.innerHTML = 'Well.. Try again';
   } else {
-    title.innerHTML = 'Avoid';
+    title.innerHTML = 'That\'s already your wife..';
   }
 }
 
