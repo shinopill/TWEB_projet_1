@@ -46,7 +46,7 @@
 </head>
 
 <body>
- 
+
     <div id="home-sec">
         <div class="overlay">
             <div class="container">
@@ -68,7 +68,7 @@
                         <i class="far fa-heart"></i>
                         <h2 id="compatibilityTitle"></h2>
                         <a href="#skill-sec" class="btn custom-btn-one btn-lg wow bounceIn animated" data-wow-duration="1s"
-                            data-wow-delay=".8s" >MORE DETAILS</a>
+                            data-wow-delay=".8s">MORE DETAILS</a>
                     </div>
 
                     <div class="col-lg-5 col-md-5 col-sm-5 text-center">
@@ -89,15 +89,22 @@
         <div class="overlay">
             <div class="container">
                 <div class="row pad-top-bottom move-me">
-                    <div class="chartchart">
-                        <canvas id="chart-languages"></canvas>
-                    </div>
-
                     <div class="col-lg-4 col-md-4 col-sm-4  wow bounceIn animated" data-wow-duration="1s"
                         data-wow-delay="1s">
                         <h1>COMPATIBILTY SCORE</h1>
-                        
-                        <a href="#resume-sec" class="btn btn-style-two btn-lg">RESULTS EXPLANATIONS</a>
+                        <h3 class="lowMarginBottom">Languages:</h3>
+                        <p class="lowMarginBottom">Compare the 5 most used languages of each user.</p>
+                        <h3 class="lowMarginBottom">Creativity:</h3>
+                        <p class="lowMarginBottom">Analysis of your creativity potential through every commits.</p>
+                        <h3 class="lowMarginBottom">Faithfulness:</h3>
+                        <p class="lowMarginBottom">"- Who's this b*tch ?"<br/>
+                        "- She's just one of my contributors. You have nothing to worry about..."</p>
+                        <h3 class="lowMarginBottom">Size Matters:</h3>
+                        <p class="lowMarginBottom">How big is your total number of lines of code ?</p>
+                        <a href="#resume-sec" class="btn btn-style-two btn-lg">RESULTS DETAILS</a>
+                    </div>
+                    <div class="chartchart">
+                        <canvas id="chart-languages"></canvas>
                     </div>
                 </div>
             </div>
@@ -109,7 +116,7 @@
             <div class="row  move-me">
                 <div class="col-lg-4 col-md-4 col-sm-4 wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".2s">
                     <h1>RESULTS</h1>
-                    <h1>EXPLANATIONS</h1>
+                    <h1>DETAILS</h1>
                     <div class="color-strip"></div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 wow bounceIn animated" data-wow-duration="1s" data-wow-delay=".4s">
@@ -120,25 +127,25 @@
                                 <li class="active">
                                     <a href="#home" data-toggle="tab" title="LANGUAGES DETAILS">
                                         <span class="round-tabs one">
-                                            <img src="assets/img/java.png"/>
+                                            <img src="assets/img/languages.PNG" />
                                         </span>
                                     </a></li>
 
-                                <li><a href="#profile" data-toggle="tab" title="COMMITS DETAILS ">
+                                <li><a href="#profile" data-toggle="tab" title="CREATIVITY DETAILS ">
                                         <span class="round-tabs two">
-                                            <img src="assets/img/Octocat.png"/>
+                                            <img src="assets/img/creativity.PNG" />
                                         </span>
                                     </a>
                                 </li>
-                                <li><a href="#exp" data-toggle="tab" title="TEAM SIZE DETAILS">
+                                <li><a href="#exp" data-toggle="tab" title="FAITHFULNESS DETAILS">
                                         <span class="round-tabs three">
-                                            <img src="assets/img/teamwork-logo-14411016.jpg"/>
+                                            <img src="assets/img/faithfulness.PNG" />
                                         </span></a>
                                 </li>
 
-                                <li><a href="#location" data-toggle="tab" title="CODING DETAILS">
+                                <li><a href="#location" data-toggle="tab" title="SIZE DETAILS">
                                         <span class="round-tabs four">
-                                            <img src="assets/img/mrCode.png"/>
+                                            <img src="assets/img/size.PNG" />
                                         </span>
                                     </a></li>
                             </ul>
@@ -147,64 +154,64 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="home">
                                 <h4 class="head text-center">LANGUAGES DETAILS</h4>
-                           
+
                                 <p class="narrow text-center">
                                     <h3 class="user1-class"></h3>
                                     <span id="user1-language1"></span>
                                     <span id="user1-language2"></span>
                                     <span id="user1-language3"></span>
 
-                        
-                           
+
+
                                     <h3 class="user2-class"></h3>
                                     <span id="user2-language1"></span>
                                     <span id="user2-language2"></span>
                                     <span id="user2-language3"></span>
-                                    
-                                    </p>
+
+                                </p>
                             </div>
                             <div class="tab-pane fade linesDisplay" id="profile">
 
-                                <h4 class="head text-center">COMMITS DETAILS </h4>
+                                <h4 class="head text-center">CREATIVITY DETAILS </h4>
                                 <p class="narrow text-center">
-                                 
-                                        <h3 class="user1-class"></h3>
-                                        <span id="user1-commits1"></span>
-                                        <span id="user1-commits2"></span>
-                                        <span id="user1-commits3"></span>
-    
-                                        <h3 class="user2-class"></h3>
-                                        <span id="user2-commits1"></span>
-                                        <span id="user2-commits2"></span>
-                                        <span id="user2-commits3"></span>
+
+                                    <h3 class="user1-class"></h3>
+                                    <span id="user1-commits1"></span>
+                                    <span id="user1-commits2"></span>
+                                    <span id="user1-commits3"></span>
+
+                                    <h3 class="user2-class"></h3>
+                                    <span id="user2-commits1"></span>
+                                    <span id="user2-commits2"></span>
+                                    <span id="user2-commits3"></span>
                                 </p>
                             </div>
                             <div class="tab-pane fade linesDisplay" id="exp">
-                                <h4 class="head text-center">COWORKERS DETAILS</h4>
+                                <h4 class="head text-center">FAITHFULNESS DETAILS</h4>
                                 <p class="narrow text-center">
                                     <h3 class="user1-class"></h3>
-                                        <span id="user1-coworkers1"></span>
-                                        <span id="user1-coworkers2"></span>
-                                        <span id="user1-coworkers3"></span>
-    
-                                        <h3 class="user2-class"></h3>
-                                        <span id="user2-coworkers1"></span>
-                                        <span id="user2-coworkers2"></span>
-                                        <span id="user2-coworkers3"></span>
+                                    <span id="user1-coworkers1"></span>
+                                    <span id="user1-coworkers2"></span>
+                                    <span id="user1-coworkers3"></span>
+
+                                    <h3 class="user2-class"></h3>
+                                    <span id="user2-coworkers1"></span>
+                                    <span id="user2-coworkers2"></span>
+                                    <span id="user2-coworkers3"></span>
                                 </p>
                             </div>
                             <div class="tab-pane fade linesDisplay" id="location">
-                                <h4 class="head text-center">CODE DETAILS</h4>
+                                <h4 class="head text-center">SIZE DETAILS</h4>
                                 <p class="narrow text-center">
                                     <h3 class="user1-class"></h3>
-                                        <span id="user1-lines1"></span>
-                                        <span id="user1-lines2"></span>
-                                        <span id="user1-lines3"></span>
-    
-                                        <h3 class="user2-class"></h3>
-                                        <span id="user2-lines1"></span>
-                                        <span id="user2-lines2"></span>
-                                        <span id="user2-lines3"></span>
+                                    <span id="user1-lines1"></span>
+                                    <span id="user1-lines2"></span>
+                                    <span id="user1-lines3"></span>
+
+                                    <h3 class="user2-class"></h3>
+                                    <span id="user2-lines1"></span>
+                                    <span id="user2-lines2"></span>
+                                    <span id="user2-lines3"></span>
                                 </p>
                             </div>
 
@@ -216,7 +223,7 @@
         </div>
     </section>
 
-    
+
 
     <div class="move-me">
         <a href="#home-sec" class="scrollup"><i class="fa fa-chevron-up"></i></a>

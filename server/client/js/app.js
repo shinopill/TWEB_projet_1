@@ -367,6 +367,8 @@ function updateChart(labels, data) {
           fontColor: 'white',
         },
       },
+      responsive: false,
+      maintainAspectRatio: false,
     },
   };
 
@@ -478,7 +480,7 @@ async function main() {
   updateTeamSize(infoCommitUser2, dataCommits, 2);
   updateLines(linesTable, 1);
   updateLines(linesTable, 2);
-  updateChart(['Languages', 'Commits', 'Team Size', 'Code done'], [graphLanguage.toFixed(2), graphCommits.toFixed(2), graphTeam.toFixed(2), graphLines.toFixed(2)]);
+  updateChart(['Languages', 'Creativity', 'Faithfulness', 'Size Matters'], [graphLanguage.toFixed(2), graphCommits.toFixed(2), graphTeam.toFixed(2), graphLines.toFixed(2)]);
   updateCompatibilityScore(graphLanguage.toFixed(2), graphCommits.toFixed(2),
     graphTeam.toFixed(2), graphLines.toFixed(2));
 
