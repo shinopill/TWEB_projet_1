@@ -5,9 +5,9 @@ Github Soulmate Calculator is a website based on very serious scientifics resear
 
 ## Why should I try it ?  
 
-Are you looking for compatible coworkers ? 
+Are you looking for some compatible coworkers with your coding skills ? 
 
-Do you want an excuse to code with your crush  ? 
+Do you want an excuse to work with your crush  ? 
 
 Do you need some guidance in your life ?
 
@@ -15,13 +15,13 @@ Are you at least 18 ?
 
 Well, this incredible app is definitely made for you ! :D 
 
-## How do I test this marvelous application ?
+## How can I test this marvelous application ?
 
 You can go on https://murmuring-thicket-89610.herokuapp.com/ and try it online.
 
-Or you can clone the repo and do the following things : 
+Or, you can clone this repo and follow these steps : 
 
-1. run the command `npm install` in a shell in the root folder of the app. 
+1. Run the command `npm install` in a shell in the root folder of the app. 
 2. Create a copy of the `.env.default` file and name it `.env`. 
 3. Now you have to create an access token in your Github account ('https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/').
 4. Change the XXX in the `.env`file with your newly generated token id.
